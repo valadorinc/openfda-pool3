@@ -5,6 +5,7 @@
 <%
 String Message = "";
 JSONArray jResults = new JSONArray();
+String ReactionList = "";
 try {
 	int StatusCode = 0;
     String JsonURL = "";
@@ -14,6 +15,10 @@ try {
 	JSONObject jResponse = restClient.getService(ServiceURI);
 	JSONObject jBody = jResponse.getJSONObject("Body");
 	jResults = jBody.getJSONArray("results");
+	ReactionList = "<option value='0'>Select Reaction</option>";
+	for (int i=0; i<jResults.length(); i++){
+		ReactionList += "<option value='" + jResults.getString(i) + "'>" + jResults.getString(i) + "</option>";
+	}
 	
 } catch (Exception e) {
 	out.println("An error has occured: " + e);
@@ -33,11 +38,13 @@ try {
 			<p>
 				Enter a reaction: 
 				<select name="reaction1">
-				<%
-					for (int i=0; i<jResults.length(); i++){
-						out.println("<option value='" + jResults.getString(i) + "'>" + jResults.getString(i) + "</option>");
-					}
-				%>
+				<%= ReactionList%>
+				</select>
+			</p>
+			<p>
+				Enter another reaction: 
+				<select name="reaction2">
+				<%= ReactionList%>
 				</select>
 			</p>
 			<p>

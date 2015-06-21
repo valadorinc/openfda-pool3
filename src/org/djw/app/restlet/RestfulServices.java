@@ -32,8 +32,8 @@ public class RestfulServices extends Application {
 		router.attach("/djwTools", InfoResource.class);  
 		
 		router.attach("/fda/lookup/{lookuptype}", LookupResource.class);
-		router.attach("/fda/search/reaction/{reactionname}/{limit}", OpenFDAResource.class);
-		router.attach("/fda/search/drug/{drugname}/{limit}", FDADrugResource.class);
+		router.attach("/fda/search/reaction/{reactionlist}/{limit}", OpenFDAResource.class);
+		router.attach("/fda/search/drug/{druglist}/{limit}", FDADrugResource.class);
 		
 		return router;
 	}

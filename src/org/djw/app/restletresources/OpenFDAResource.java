@@ -26,14 +26,22 @@ public class OpenFDAResource extends ServerResource {
 		try {
 			
 			JSONArray Drugs = new JSONArray();
-			String Reaction = "";
+			String ReactionList = "";
 			String Limit = "1";
-			if (getRequest().getAttributes().get("reactionname") != null ) Reaction = (String) getRequest().getAttributes().get("reactionname");
+			if (getRequest().getAttributes().get("reactionlist") != null ) ReactionList = (String) getRequest().getAttributes().get("reactionlist");
 			if (getRequest().getAttributes().get("limit") != null ) Limit = (String) getRequest().getAttributes().get("limit");
 			
-			String ServiceURI = "/event.json?search=patient.reaction.reactionmeddrapt:\""
-					+ Reaction
-					+ "\"&limit=" + Limit;
+			String[] reactions = ReactionList.split("~");
+			String Reaction = "";
+			for (int r=0; r<reactions.length; r++){
+				Reaction += "patient.reaction.reactionmeddrapt:\"" + reactions[r] + "\"";
+				if (r < reactions.length -1){
+					Reaction += "+AND+";
+				}
+			}
+			
+			String ServiceURI = "/event.json?search=" + Reaction + "&limit=" + Limit;
+			
 
 			OpenFDAClient restClient = new OpenFDAClient();
 			JSONObject json = restClient.getService(ServiceURI);

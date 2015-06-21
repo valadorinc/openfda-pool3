@@ -3,6 +3,7 @@
 <%@ page import="org.json.JSONArray" %>
 <%@ page import="org.djw.tools.restlet.*" %>
 <%
+String DrugList = "";
 String Message = "";
 JSONArray jResults = new JSONArray();
 try {
@@ -14,6 +15,11 @@ try {
 	JSONObject jResponse = restClient.getService(ServiceURI);
 	JSONObject jBody = jResponse.getJSONObject("Body");
 	jResults = jBody.getJSONArray("results");
+	DrugList = "<option value='0'>Select Drug</option>";
+	for (int i=0; i<jResults.length(); i++){
+		DrugList += "<option value='" + jResults.getString(i) + "'>" + jResults.getString(i) + "</option>";
+	}
+
 	
 } catch (Exception e) {
 	out.println("An error has occured: " + e);
@@ -31,13 +37,15 @@ try {
 	<div>
 		<form name="subForm" method="post" action="drugresults.jsp">
 			<p>
-				Enter a reaction: 
+				Enter a drug: 
 				<select name="drug1">
-				<%
-					for (int i=0; i<jResults.length(); i++){
-						out.println("<option value='" + jResults.getString(i) + "'>" + jResults.getString(i) + "</option>");
-					}
-				%>
+				<%= DrugList %>
+				</select>
+			</p>
+			<p>
+				Enter another drug: 
+				<select name="drug2">
+				<%= DrugList %>
 				</select>
 			</p>
 			<p>
