@@ -1,0 +1,7 @@
+base_url=http://localhost:8080
+service_url=http://localhost:8080/openfda/service
+json_body_indent=1
+absolute_base_path=/usr/share/tomcat7/webapps/openfda/
+db_descriptor=jdbc/openfda
+version_file=WEB-INF/classes/version
+openfda_service=http://api.fda.gov/drug
