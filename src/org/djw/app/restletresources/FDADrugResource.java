@@ -1,10 +1,7 @@
 package org.djw.app.restletresources;
 
 
-import java.util.ArrayList;
-
 import openfda.classes.OpenFDAClient;
-
 import org.apache.log4j.Logger;
 import org.djw.tools.json.ResponseJson;
 import org.json.JSONArray;
@@ -75,50 +72,5 @@ public class FDADrugResource extends ServerResource {
 		rep = new JsonRepresentation(jResponse.getResponse(jResponse));
 		return rep;
 	}
-	
-	private JSONArray dedupeDrugs(ArrayList<String> drugNames, ArrayList<String> drugIndications){
-		ArrayList<String> uniqueNames = new ArrayList<String>();
-		JSONArray cleanList = new JSONArray();
-		try{
-			for (int i=0; i<drugNames.size(); i++){
-				String dName = drugNames.get(i);
-				int dIndex = uniqueNames.indexOf(dName);
-				if (dIndex == -1){
-					String dIndic = drugIndications.get(i);
-					uniqueNames.add(dName);
-					JSONObject Drug = new JSONObject();
-					Drug.put("DrugName", dName);
-					Drug.put("DrugIndication", dIndic);
-					cleanList.put(Drug);
-				}
-			}
-//			ArrayList<String> dNames = new ArrayList<String>();
-//			ArrayList<String> dInds = new ArrayList<String>();
-//			for (int n=0; n<cleanList.length(); n++){
-//				JSONObject jD = cleanList.getJSONObject(n);
-//				dNames.add(jD.getString("DrugName"));
-//				dInds.add(jD.getString("DrugIndication"));
-//			}
-//			JSONArray jSorted = new JSONArray();
-//			ArrayList<String> SortOrder = dNames;
-//			Collections.sort(SortOrder);
-//			for (int i=0; i<SortOrder.size(); i++){
-//				String dname = SortOrder.get(i);
-//				int sIdx = dNames.indexOf(dname);
-//				JSONObject jRec = new JSONObject();
-//				jRec.put("DrugName", dNames.get(sIdx));
-//				jRec.put("DrugIndication", dInds.get(sIdx));
-//				jSorted.put(jRec);
-//			}
-//			cleanList = jSorted;
-			
-			
-		} catch(Exception e){
-			
-		}
-		return cleanList;
-	}
-	
-
 }
 

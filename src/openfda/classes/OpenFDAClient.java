@@ -63,7 +63,6 @@ public class OpenFDAClient {
 			js.key("request").value(jsRequest);
 			js.endObject();
 		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		ClientResource requestResource = new ClientResource(ServiceURL + ServiceURI);
