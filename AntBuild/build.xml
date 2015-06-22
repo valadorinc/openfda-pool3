@@ -6,6 +6,7 @@ ex.
 ant -Dwebapp.env=prod  - production
 ant -Dwebapp.env=dev  - development
  
+compile was remove install remove phpprod
 -->
 <project name="AppBuilder" default="war" basedir="..">
 
