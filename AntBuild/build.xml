@@ -72,6 +72,15 @@ ant -Dwebapp.env=dev  - development
 		</war>
 	</target>
 	
+	<target name="phpprod">
+		<delete>
+		    <fileset dir="${prod.php.home}" includes="**" />
+		</delete>
+		<copy todir="${prod.php.home}">
+			<fileset dir="${root.dir}/${webapp.name}/${prod.php.filedir}"/>
+		</copy>
+	</target>
+
 	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask">
 		<classpath refid="classpath"/>
 	</taskdef>
