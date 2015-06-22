@@ -1,6 +1,14 @@
 <?php
+require('../db/constant.php');
+require('../db/database.php');
 
-$url = 'http://52.4.127.22:8080/openfda/service/fda/lookup/reactions';
+if (!isset($_GET['keyword'])) {
+	die("");
+}
+
+$keyword = $_GET['keyword'];
+
+$url = 'http://52.4.149.230:8080/openfda/service/fda/search/drug/' . $keyword . '/100';
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -13,9 +21,15 @@ $StatusCode = $data->StatusCode;
 if ($StatusCode == "0"){
 	// if the call was successful there will be a 'body' containing all the data. In this case i just created an array with the results which we pull from the body.
 	$body = $data->Body;
-	$results = $body->results;
-	//echo '<p>' . json_encode($results) . '</p>';
-	echo json_encode($results, JSON_HEX_APOS);
+	$results = $body->ReportOutput->reactions;
+	//echo '<p>' . json_encode($results) . '</p>'
+	$reactions = array();
+	foreach($results as $result) {
+		
+		$reaction = $result->term;
+		$reactions[] = $reaction;
+	}
+	echo json_encode($reactions, JSON_HEX_APOS);
 }
 
 
