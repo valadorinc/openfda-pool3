@@ -20,17 +20,28 @@ public class LookupResource extends ServerResource {
 	public Representation represent() throws JSONException {
 		String LookupType = "";
 		if (getRequest().getAttributes().get("lookuptype") != null ) LookupType = (String) getRequest().getAttributes().get("lookuptype");
+		String Partial = "";
+		if (getRequest().getAttributes().get("partial") != null ) Partial = (String) getRequest().getAttributes().get("partial");
+
 		
 		String dbType = "";
 		String sqlStatement = "";
 		
 		if (LookupType.equals("reactions")){
-			sqlStatement = "select reaction from reactions order by reaction";
+			sqlStatement = "select reaction from reactions ";
+			if (!Partial.equals("")){
+				sqlStatement += "where reaction like '%" + Partial + "%' ";
+			}
+			sqlStatement += "order by reaction";
 		}
 		if (LookupType.equals("drugs")){
-			sqlStatement = "select drugname from drugs order by drugname";
+			sqlStatement = "select drugname from drugs ";
+			if (!Partial.equals("")){
+				sqlStatement += "where drugname like '%" + Partial + "%' ";
+			}
+			sqlStatement += "order by drugname";
 		}
-		
+
 		DBTableJNDI dbTable = new DBTableJNDI();
 		dbTable = dbTable.getDBTableResults(sqlStatement, dbType);
 		OutputFormatter formatter = new OutputFormatter();
