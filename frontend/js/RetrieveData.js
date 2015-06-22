@@ -2,7 +2,7 @@ $( document ).ready(function() {
 	//$("#submit").keyup(function() {
 	$( "#submit" ).click(function(e) {
 		  e.preventDefault();
-		  alert( "Handler for .click() called." );
+		  //alert( "Handler for .click() called." );
 		  var keyword = $("#keyword").val();
 		  
 		  $.get( "data/OpenFdaDataRetrieval.php", { keyword: keyword } )
