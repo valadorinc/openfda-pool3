@@ -9,7 +9,7 @@ if (!isset($_GET['keyword'])) {
 $keyword = $_GET['keyword'];
 //$data = serachForKeyword($keyword);
 
-$url = 'http://52.4.127.22:8080/openfda/service/fda/lookup/drugs';
+$url = 'http://52.4.149.230:8080/openfda/service/fda/lookup/drugs/'.$keyword;
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
