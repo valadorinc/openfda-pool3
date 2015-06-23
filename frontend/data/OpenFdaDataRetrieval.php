@@ -1,6 +1,12 @@
 <?php
-require('../db/constant.php');
-require('../db/database.php');
+//require('../db/constant.php');
+//require('../db/database.php');
+
+/*if (!isset($_GET['keyword'])) {
+	die("");
+}*/
+
+//$arr = json_encode($_POST);
 
 if (!isset($_GET['keyword'])) {
 	die("");
@@ -23,13 +29,15 @@ if ($StatusCode == "0"){
 	$body = $data->Body;
 	$results = $body->ReportOutput->reactions;
 	//echo '<p>' . json_encode($results) . '</p>'
-	$reactions = array();
+	/*$reactions = array();
 	foreach($results as $result) {
 		
 		$reaction = $result->term;
 		$reactions[] = $reaction;
-	}
-	echo json_encode($reactions, JSON_HEX_APOS);
+	}*/
+	//echo json_encode($reactions, JSON_HEX_APOS);
+	//echo json_encode($results, JSON_HEX_APOS);
+	echo json_encode($results);
 }
 
 
