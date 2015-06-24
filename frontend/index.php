@@ -7,9 +7,63 @@
 <head>
     <title>ApplicationRx With Bootstrap and Angular JS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet" media="screen">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="css/styles.css" rel="stylesheet" media="screen">
+    
+<style type="text/css">
+      body {
+        background: white;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+      
+      h1 {
+        font-size: 72px;
+      }
+      
+      h1 a {
+        color: #999;
+      }
+      
+      .selection {
+        height: 98px;
+        background-image: url(images/selection.png);
+        background-position: bottom center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .select-drug,
+      .select-reaction {
+        width: 50%;
+        height: 98px;
+        float: left;
+        text-indent: -133337px;
+      }
+      
+      .search-form {
+        border-radius: 10px;
+        padding: 20px;
+      }
+
+      #search-drug {
+        background: #15489a;
+      }
+      
+      #search-reaction {
+        background: #6fabdd;
+      }
+      
+      .add-field {
+        font-size: 64px;
+      }
+      
+      .add-field a,
+      .label-info a {
+        color: white;
+      }
+      
+    </style>
     
     <!-- --------------------------------------------------- -->
 <!-- <style>
@@ -43,7 +97,6 @@
   .ui-autocomplete-loading {
     background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
   }
-  #keyword { width: 25em; }
   </style>
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
@@ -66,36 +119,58 @@
         <button id="firstBtn" ng-click="onSubmitBtnClick()">Click me</button>
     </div>
   	
-<div class="container">
-  <div class="text-center">
-  <h1>appRX</h1>
-  </div>
-  <div class="jumbotron">
-    <input type="text" value="" placeholder="Search" id="keyword" name="keyword">
-  	<div id="results"></div>
-  
-  <h2>Image</h2>
-  <p>The .img-responsive class makes the image scale nicely to the parent element (resize the browser window to see the effect):</p>                  
-  <img src="images/cinqueterre.jpg" class="img-responsive img-circle" alt="Cinque Terre" width="304" height="236">
-  
-  <a href="#" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-search"></span></a>
+<div class="container-fluid">
+    <div class="row">
 
-  <div class="table-responsive">          
-      <table class="table" id="records_table">
-      </table>
-  </div>
-</div>
-
-</div>
-
-<!-- <div class="col-lg-6 col-sm-12 ng-scope" id="line-chart" ng-controller="LineCtrl">
-    <div class="panel panel-default">
-        <div class="panel-heading">Line Chart</div>
-        <div class="panel-body">
-            <div class="chart-container"><canvas id="line" class="chart chart-line ng-isolate-scope" data="data" labels="labels" legend="true" click="onClick" hover="onHover" series="series" height="391" width="784" style="width: 523px; height: 261px;"></canvas><chart-legend><ul class="line-legend"><li><span style="background-color:rgba(151,187,205,1)"></span>Series C</li><li><span style="background-color:rgba(220,220,220,1)"></span>Series D</li></ul></chart-legend></div>
+      <div class="col-md-4"> </div>
+      <div class="col-md-4"> 
+        <div class="selection">
+          <a href="#search-drug" class="select-drug" data-toggle="tab">Drug</a>
+          <a href="#search-reaction" class="select-reaction" data-toggle="tab">Reaction</a>
         </div>
+        
+        <div class="tab-content">
+        
+          <form id="search-drug" class="tab-pane search-form active">
+            <div>
+              <input type="text" id="keyword" class="form-control input-lg" placeholder="Drug Name">             
+              <!-- <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+              </span> -->
+            </div>
+            
+            <div class="text-center add-field"><a href="#">+</a></div>
+          
+	        <div id="records_table_div" class="table-responsive table-bordered table-stripped">          
+	            <table class="table" id="records_table"></table>
+	        </div>
+            
+          </form>
+      
+          <form id="search-reaction" class="tab-pane search-form">
+            <div>
+              <input type="text" class="form-control input-lg" placeholder="Adverse Reaction">
+              <!-- <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+              </span> -->
+            </div>
+        
+            <div class="text-center add-field"><a href="#">+</a></div>
+
+          </form>
+
+        </div>
+        
+        <div class="text-right">
+          <h3><span class="label label-info"><a href="#">?</a></span></h3>
+        </div>
+
+      </div>
+      <div class="col-md-4"> </div>
+      
     </div>
-</div> -->
+
+    </div>
 
 </body>
 </html>
