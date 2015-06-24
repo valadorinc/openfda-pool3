@@ -1,6 +1,8 @@
 package org.djw.app.restletresources;
 
 
+import openfda.classes.ServerAuth;
+
 import org.apache.log4j.Logger;
 import org.djw.tools.db.DBTableJNDI;
 import org.djw.tools.json.OutputFormatter;
@@ -18,42 +20,54 @@ public class LookupResource extends ServerResource {
 	
 	@Get
 	public Representation represent() throws JSONException {
-		String LookupType = "";
-		if (getRequest().getAttributes().get("lookuptype") != null ) LookupType = (String) getRequest().getAttributes().get("lookuptype");
-		String Partial = "";
-		if (getRequest().getAttributes().get("partial") != null ) Partial = (String) getRequest().getAttributes().get("partial");
 
-		
-		String dbType = "";
-		String sqlStatement = "";
-		
-		if (LookupType.equals("reactions")){
-			sqlStatement = "select reaction from reactions ";
-			if (!Partial.equals("")){
-				sqlStatement += "where reaction like '%" + Partial + "%' ";
-			}
-			sqlStatement += "order by reaction";
-		}
-		if (LookupType.equals("drugs")){
-			sqlStatement = "select drugname from drugs ";
-			if (!Partial.equals("")){
-				sqlStatement += "where drugname like '%" + Partial + "%' ";
-			}
-			sqlStatement += "order by drugname";
-		}
-
-		DBTableJNDI dbTable = new DBTableJNDI();
-		dbTable = dbTable.getDBTableResults(sqlStatement, dbType);
-		OutputFormatter formatter = new OutputFormatter();
-		JSONArray jResults = formatter.getJsonArray(dbTable);
-		
-		JSONObject jBody = new JSONObject();
 		String Message = "";
 		int Status = 0;
-
+		JSONObject jBody = new JSONObject();
 		
-		jBody.put("results", jResults);
+		String ServerKey = "";
+		if (getRequest().getAttributes().get("ServerKey") != null ) ServerKey = (String) getRequest().getAttributes().get("ServerKey");
+		ServerAuth serverAuth = new ServerAuth();
+		boolean Authenticated = serverAuth.authenticate(ServerKey);
 
+		if (Authenticated){
+			String LookupType = "";
+			if (getRequest().getAttributes().get("lookuptype") != null ) LookupType = (String) getRequest().getAttributes().get("lookuptype");
+			String Partial = "";
+			if (getRequest().getAttributes().get("partial") != null ) Partial = (String) getRequest().getAttributes().get("partial");
+	
+			
+			String dbType = "";
+			String sqlStatement = "";
+			
+			if (LookupType.equals("reactions")){
+				sqlStatement = "select reaction from reactions ";
+				if (!Partial.equals("")){
+					sqlStatement += "where reaction like '%" + Partial + "%' ";
+				}
+				sqlStatement += "order by reaction";
+			}
+			if (LookupType.equals("drugs")){
+				sqlStatement = "select drugname from drugs ";
+				if (!Partial.equals("")){
+					sqlStatement += "where drugname like '%" + Partial + "%' ";
+				}
+				sqlStatement += "order by drugname";
+			}
+	
+			DBTableJNDI dbTable = new DBTableJNDI();
+			dbTable = dbTable.getDBTableResults(sqlStatement, dbType);
+			OutputFormatter formatter = new OutputFormatter();
+			JSONArray jResults = formatter.getJsonArray(dbTable);
+			
+			
+			Message = "";
+			Status = 0;
+			jBody.put("results", jResults);
+		} else {
+			Status = 1;
+			Message = "invalid authentication token";
+		}
 		ResponseJson jResponse = new ResponseJson();
 		Representation rep = null;
 		jResponse.setStatusCode(Status);

@@ -2,14 +2,19 @@
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="org.json.JSONArray" %>
 <%@ page import="org.djw.tools.restlet.*" %>
+<%@ page import="openfda.classes.ServerAuth" %>
 <%
 String Message = "";
 JSONArray jResults = new JSONArray();
 String ReactionList = "";
 try {
+    String ServerKey = "";
+    ServerAuth serverAuth = new ServerAuth();
+    ServerKey = serverAuth.getKey();
+
 	int StatusCode = 0;
     String JsonURL = "";
-	String ServiceURI = "/fda/lookup/reactions";
+	String ServiceURI = "/fda/" + ServerKey + "/lookup/reactions";
 
 	RestClient restClient = new RestClient();
 	JSONObject jResponse = restClient.getService(ServiceURI);

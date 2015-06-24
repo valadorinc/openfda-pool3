@@ -2,6 +2,7 @@
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="org.json.JSONArray" %>
 <%@ page import="org.djw.tools.restlet.*" %>
+<%@ page import="openfda.classes.ServerAuth" %>
 <%
 
 String Drug = "";
@@ -15,13 +16,17 @@ String Message = "";
 String Records = "";
 if (!Drug.equals("0")){
 	try {
+	    String ServerKey = "";
+	    ServerAuth serverAuth = new ServerAuth();
+	    ServerKey = serverAuth.getKey();
+
 		int StatusCode = 0;
 	    String JsonURL = "";
 	    String DrugList = "";
 	    DrugList += Drug;
 	    if (!Drug2.equals("0")) DrugList += "~" + Drug2;
 	
-		String ServiceURI = "/fda/search/drug/" + DrugList;
+		String ServiceURI = "/fda/" + ServerKey + "/search/drug/" + DrugList;
 	
 		RestClient restClient = new RestClient();
 		JSONObject jResponse = restClient.getService(ServiceURI);

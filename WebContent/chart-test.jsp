@@ -2,22 +2,20 @@
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="org.json.JSONArray" %>
 <%@ page import="org.djw.tools.restlet.*" %>
+<%@ page import="openfda.classes.ServerAuth" %>
 <%
 
-/* String Reaction = "";
-String Reaction2 = "";
-String Limit = "";
-if (request.getParameter("reaction1") !=null) Reaction = request.getParameter("reaction1");
-if (request.getParameter("reaction2") !=null) Reaction2 = request.getParameter("reaction2");
-if (request.getParameter("limit") !=null) Limit = request.getParameter("limit");
- */
  
+ String ServerKey = "";
+ ServerAuth serverAuth = new ServerAuth();
+ ServerKey = serverAuth.getKey();
+
 String Message = "";
  String sResponse = "";
 	try {
 		int StatusCode = 0;
 	    String JsonURL = "";
-		String ServiceURI = "/fda/chart/reactions/\"abdominal pain\"~death";
+		String ServiceURI = "/fda/" + ServerKey + "/chart/reactions/\"abdominal pain\"~death";
 	
 		RestClient restClient = new RestClient();
 		JSONObject jResponse = restClient.getService(ServiceURI);
