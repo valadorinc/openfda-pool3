@@ -23,16 +23,23 @@ if (!Reaction.equals("0")){
 		RestClient restClient = new RestClient();
 		JSONObject jResponse = restClient.getService(ServiceURI);
 	 	JSONObject jBody = jResponse.getJSONObject("Body");
-	 	JSONArray jRecords = new JSONArray();
-		jRecords = jBody.getJSONObject("ReportOutput").getJSONArray("drugs");
+	 	
+		JSONArray cols = jBody.getJSONObject("ReportOutput").getJSONArray("cols");
+		JSONArray rows = jBody.getJSONObject("ReportOutput").getJSONArray("rows");
 	
 		Records = "<table>";
-		Records += "<tr><th>Drug Name</th><th>Occurrences</></tr>";
-		for (int i=0; i<jRecords.length(); i++){
-			JSONObject jRec = jRecords.getJSONObject(i);
-			String DrugName = jRec.getString("DrugName");
-			int Occurrences = jRec.getInt("Occurrences");
-			Records += "<tr><td>" + DrugName + "</td><td>" + Occurrences + "</td></tr>";
+		Records += "<tr>";
+		for (int i=0; i<cols.length(); i++){
+			Records += "<th>" + cols.getString(i) + "</th>";
+		}
+		Records += "</tr>";
+		for (int i=0; i<rows.length(); i++){
+			Records += "<tr>";
+			for (int c=0; c<cols.length(); c++){
+				JSONArray row = rows.getJSONArray(i);
+				Records += "<td>" + row.getString(c) + "</td>";
+			}
+			Records += "</tr>";
 		}
 		Records += "</table>";
 		
