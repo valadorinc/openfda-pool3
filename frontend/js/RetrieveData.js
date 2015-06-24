@@ -20,13 +20,12 @@ app.controller("drugController", function($scope, $http) {
 		    	        $('#drug_table').append($thead);
 			    		
 			    	    $.each(response.rows, function(i, item) {
-			    	    	//$tr = $('<tr class="success">').append($('<td>').text(item.reaction));
 			    	    	$tr = $('<tr class="success">').append($('<td>').text(item[0]),$('<td>').text(item[1]));
 			    	        $('#drug_table').append($tr);
 			    	    });
 			    	});
 		      }).
-		      error(function(response) {
+		      error(function(error) {
 		    	  //alert('error');
 		      });
 	  };
@@ -50,13 +49,12 @@ app.controller("reactionController", function($scope, $http) {
 		    	        $('#reaction_table').append($thead);
 			    		
 			    	    $.each(response.rows, function(i, item) {
-			    	        //$tr = $('<tr class="success">').append($('<td>').text(item.reaction),$('<td>').text(item.count),$('<td>').text(item.term));
 			    	    	$tr = $('<tr class="success">').append($('<td>').text(item[0]),$('<td>').text(item[1]));
 			    	        $('#reaction_table').append($tr);
 			    	    });
 			    	});
 		      }).
-		      error(function(response) {
+		      error(function(error) {
 		    	  //alert('error');
 		      });
 	  };

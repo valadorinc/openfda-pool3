@@ -13,11 +13,17 @@ if (!isset($_GET['keyword'])) {
 $type = $_GET['type'];
 $keyword = $_GET['keyword'];
 
+$type = strip_tags($type);
+$type = htmlspecialchars($type);
+$keyword = strip_tags($keyword);
+$keyword = htmlspecialchars($keyword);
+$keyword = urlencode($keyword);
+
 if($type == "reaction") {
-    $url = LOOKUP_REACTION_URL . $keyword;
+	$url = API_SERVICE_BASE_URL . API_KEY . '/lookup/reactions/' . $keyword;
 }
 else {
-	$url = LOOKUP_DRUG_URL . $keyword;
+	$url = API_SERVICE_BASE_URL . API_KEY . '/lookup/drugs/' . $keyword;   
 }
 
 
