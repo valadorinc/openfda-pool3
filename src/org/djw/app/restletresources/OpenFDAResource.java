@@ -19,17 +19,15 @@ public class OpenFDAResource extends ServerResource {
 	@Get
 	public Representation represent() throws JSONException {
 
+		JSONArray Drugs = new JSONArray();
 		JSONObject jBody = new JSONObject();
 		JSONObject ReportOutput = new JSONObject();
 		String Message = "";
 		int Status = 0;
 		try {
 			
-			JSONArray Drugs = new JSONArray();
 			String ReactionList = "";
-			String Limit = "1";
 			if (getRequest().getAttributes().get("reactionlist") != null ) ReactionList = (String) getRequest().getAttributes().get("reactionlist");
-			if (getRequest().getAttributes().get("limit") != null ) Limit = (String) getRequest().getAttributes().get("limit");
 			
 			String[] reactions = ReactionList.split("~");
 			String Reaction = "";
@@ -40,37 +38,23 @@ public class OpenFDAResource extends ServerResource {
 				}
 			}
 			
-			String ServiceURI = "/event.json?search=" + Reaction + "&limit=" + Limit;
+			String ServiceURI = "/event.json?search=" + Reaction + "&count=patient.drug.medicinalproduct.exact";
 			
 
 			OpenFDAClient restClient = new OpenFDAClient();
 			JSONObject json = restClient.getService(ServiceURI);
-			JSONObject meta = json.getJSONObject("meta");
-			JSONObject metaResults = meta.getJSONObject("results");
 			JSONArray results = json.getJSONArray("results");
-
-			ArrayList<String> DrugNames = new ArrayList<String>();
-			ArrayList<String> DrugIndications = new ArrayList<String>();
-			for (int p=0; p<results.length(); p++){
-				JSONObject resultRec = results.getJSONObject(p);
-				JSONObject patient = resultRec.getJSONObject("patient");
-				JSONArray patientDrugs = patient.getJSONArray("drug");
-				for (int d=0; d<patientDrugs.length(); d++){
-					JSONObject drug = patientDrugs.getJSONObject(d);
-					String drugName = "";
-					String drugIndication = "";
-					
-					if (!drug.isNull("medicinalproduct")) drugName = drug.getString("medicinalproduct");
-					if (!drug.isNull("drugindication")) drugIndication = drug.getString("drugindication");
-					
-					DrugNames.add(drugName);
-					DrugIndications.add(drugIndication);
-				}
-				Drugs = this.dedupeDrugs(DrugNames,DrugIndications);
+			for (int i=0; i<results.length(); i++){
+				JSONObject result = results.getJSONObject(i);
+				String Drug = result.getString("term");
+				int Occurrences = result.getInt("count");
+				JSONObject jDrug = new JSONObject();
+				jDrug.put("DrugName", Drug);
+				jDrug.put("Occurrences", Occurrences);
+				Drugs.put(jDrug);
 			}
+
 			
-			ReportOutput.put("total", metaResults.getInt("total"));
-			ReportOutput.put("limit", metaResults.getInt("limit"));
 			ReportOutput.put("drugs", Drugs);
 
 //logger.debug(metaResults.toString(1));			
