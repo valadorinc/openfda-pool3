@@ -1,2 +1,6 @@
 /build/
 frontend/.buildpath
+.buildpath
+.settings/org.eclipse.php.core.prefs
+frontend/search_drug.php
+frontend/search_reaction.php
