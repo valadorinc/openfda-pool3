@@ -62,7 +62,7 @@ public class OpenFDAResource extends ServerResource {
 					JSONObject result = results.getJSONObject(i);
 					String Drug = result.getString("term");
 					int Occurrences = result.getInt("count");
-					Drug = "<a href='#'>" + Drug + "</a>";
+					Drug = "<a href='druginfo.jsp?DrugName=" + Drug + "'>" + Drug + "</a>";
 					row.put(Drug);
 					row.put(Occurrences);
 					rows.put(row);

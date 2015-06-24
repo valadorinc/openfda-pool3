@@ -21,6 +21,7 @@ public class RestfulServices extends Application {
 		router.attach("/fda/{ServerKey}/search/reaction/{reactionlist}", OpenFDAResource.class);
 		router.attach("/fda/{ServerKey}/search/drug/{druglist}", FDADrugResource.class);
 		router.attach("/fda/{ServerKey}/chart/{ResultType}/{ThingList}", ChartResource.class);
+		router.attach("/fda/{ServerKey}/druginfo/{DrugName}", DrugInfoResource.class);
 
 		
 		return router;
