@@ -41,7 +41,7 @@ public class FDADrugResource extends ServerResource {
 				String[] drugs = DrugList.split("~");
 				String Drug = "";
 				for (int r=0; r<drugs.length; r++){
-					Drug += "patient.drug.medicinalproduct:\"" + drugs[r] + "\"";
+					Drug += "patient.drug.openfda.substance_name:\"" + drugs[r] + "\"";
 					if (r < drugs.length -1){
 						Drug += "+AND+";
 					}

@@ -6,7 +6,7 @@
 
 <%
 	
-	String ServiceURI = "/event.json?count=patient.drug.medicinalproduct.exact&limit=100";
+	String ServiceURI = "/label.json?count=openfda.substance_name.exact&limit=100";
  	
  	if (request.getParameter("serviceURI") != null) ServiceURI = request.getParameter("serviceURI");
 	
