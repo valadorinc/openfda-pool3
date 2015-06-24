@@ -48,7 +48,7 @@ public class OpenFDAResource extends ServerResource {
 				}
 
 				String ServiceURI = "/event.json?search=" + Reaction
-						+ "&count=patient.drug.medicinalproduct.exact";
+						+ "&count=patient.drug.openfda.substance_name.exact";
 
 				OpenFDAClient restClient = new OpenFDAClient();
 				JSONObject json = restClient.getService(ServiceURI);
@@ -62,6 +62,7 @@ public class OpenFDAResource extends ServerResource {
 					JSONObject result = results.getJSONObject(i);
 					String Drug = result.getString("term");
 					int Occurrences = result.getInt("count");
+					Drug = "<a href='druginfo.jsp?DrugName=" + Drug + "'>" + Drug + "</a>";
 					row.put(Drug);
 					row.put(Occurrences);
 					rows.put(row);
