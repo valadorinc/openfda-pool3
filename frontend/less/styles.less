@@ -1,28 +1,86 @@
-
-// Used for the autocomplete functionality
-#keyword {
-	width: 200px;
-	font-size: 1em;
-}
-
 #results {
   display: none;
-	width: 204px;
-	display: absolute;
-	border: 1px solid #c0c0c0;
+  width: 204px;
+  display: absolute;
+  border: 1px solid #c0c0c0;
 }
-
 #results .item {
-	padding: 3px;
-	font-family: Helvetica;
-	border-bottom: 1px solid #c0c0c0;
+  padding: 3px;
+  font-family: Helvetica;
+  border-bottom: 1px solid #c0c0c0;
 }
-
 #results .item:last-child {
-	border-bottom: 0px;
+  border-bottom: 0px;
+}
+#results .item:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+/* Override Bootstrap Styles */
+.other-color {
+  background: green !important;
+}
+/* Spacers */
+.spacer-top-40 {
+  margin-top: 40px;
+}
+.spacer-bottom-40 {
+  margin-bottom: 40px;
 }
 
-#results .item:hover {
-	background-color: #f2f2f2;
-	cursor: pointer;
+.spacer-top-30 {
+  margin-top: 30px;
+}
+.spacer-bottom-30 {
+  margin-bottom: 30px;
+}
+
+.spacer-top-20 {
+  margin-top: 20px;
+}
+.spacer-bottom-20 {
+  margin-bottom: 20px;
+}
+
+.spacer-top-15 {
+  margin-top: 15px;
+}
+.spacer-bottom-15 {
+  margin-bottom: 15px;
+}
+
+.spacer-top-10 {
+  margin-top: 15px;
+}
+.spacer-bottom-10 {
+  margin-bottom: 15px;
+}
+
+.spacer-padding-bottom-5 {
+    padding-bottom:5px !important;
+}
+
+.spacer-padding-top-5 {
+    padding-top:5px !important;
+}
+
+/* Fonts */
+.searchboxtext {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 1.1em !important;
+  text-transform: uppercase;
+  color: #222222 !important;
+}
+/* Headings */
+.heading {
+  margin: 1em 0 0.9em 0;
+  font-weight: 600;
+  font-family: 'Titillium Web', sans-serif;
+  position: relative;
+  text-shadow: 0 8px 1px rgba(0, 0, 0, 0.4);
+  font-size: 55px;
+  line-height: 40px;
+  color: #355681;
+  /* text-transform: uppercase; */
+  /* border-bottom: 1px solid rgba(53, 86, 129, 0.3); */
 }
