@@ -24,7 +24,8 @@ public class FDADrugResource extends ServerResource {
 		int Status = 0;
 		try {
 			
-			JSONArray Reactions = new JSONArray();
+			JSONArray cols = new JSONArray();
+			JSONArray rows = new JSONArray();
 			String DrugList = "";
 			if (getRequest().getAttributes().get("druglist") != null ) DrugList = (String) getRequest().getAttributes().get("druglist");
 			
@@ -43,16 +44,20 @@ public class FDADrugResource extends ServerResource {
 			JSONObject json = restClient.getService(ServiceURI);
 			JSONArray results = json.getJSONArray("results");
 
+			cols.put("Reaction");
+			cols.put("Occurrences");
 			for (int p=0; p<results.length(); p++){
+				JSONArray row = new JSONArray();
 				JSONObject rec = results.getJSONObject(p);
 				String rName = rec.getString("term");
 				int rCount = rec.getInt("count");
-				rec.put("reaction", rName);
-				rec.put("count", rCount);
-				Reactions.put(rec);
+				row.put(rName);
+				row.put(rCount);
+				rows.put(row);
 			}
+			ReportOutput.put("cols", cols);
+			ReportOutput.put("rows", rows);
 			
-			ReportOutput.put("reactions", Reactions);
 
 //logger.debug(json.toString(1));	
 			
