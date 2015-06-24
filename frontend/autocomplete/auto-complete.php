@@ -1,12 +1,26 @@
 <?php
 
+require('../config/constant.php');
+
+if (!isset($_GET['type'])) {
+	die("");
+}
+
 if (!isset($_GET['keyword'])) {
 	die("");
 }
 
+$type = $_GET['type'];
 $keyword = $_GET['keyword'];
 
-$url = 'http://52.4.149.230:8080/openfda/service/fda/lookup/drugs/'.$keyword;
+if($type == "reaction") {
+    $url = LOOKUP_REACTION_URL . $keyword;
+}
+else {
+	$url = LOOKUP_DRUG_URL . $keyword;
+}
+
+
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

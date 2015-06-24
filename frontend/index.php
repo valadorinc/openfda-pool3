@@ -10,77 +10,6 @@
     <link href="css/styles.css" rel="stylesheet" media="screen">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    
-<style type="text/css">
-      body {
-        background: white;
-        font-family: Helvetica, Arial, sans-serif;
-      }
-      
-      h1 {
-        font-size: 72px;
-      }
-      
-      h1 a {
-        color: #999;
-      }
-      
-      .selection {
-        height: 98px;
-        background-image: url(images/selection.png);
-        background-position: bottom center;
-        background-size: contain;
-        background-repeat: no-repeat;
-      }
-
-      .select-drug,
-      .select-reaction {
-        width: 50%;
-        height: 98px;
-        float: left;
-        text-indent: -133337px;
-      }
-      
-      .search-form {
-        border-radius: 10px;
-        padding: 20px;
-      }
-
-      #search-drug {
-        background: #15489a;
-      }
-      
-      #search-reaction {
-        background: #6fabdd;
-      }
-      
-      .add-field {
-        font-size: 64px;
-      }
-      
-      .add-field a,
-      .label-info a {
-        color: white;
-      }
-      
-    </style>
-    
-    <!-- --------------------------------------------------- -->
-<!-- <style>
-	table, th , td  {
-	  border: 1px solid grey;
-	  border-collapse: collapse;
-	  padding: 5px;
-	}
-	table tr:nth-child(odd)	{
-	  background-color: #f1f1f1;
-	}
-	table tr:nth-child(even) {
-	  background-color: #ffffff;
-	}
-	</style> -->
-    <!-- --------------------------------------------------- -->
-    
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     
@@ -114,9 +43,14 @@
 <!-- <body ng-app="mainModule"> -->
 <body ng-app="examples" id="top" class="ng-scope" data-twttr-rendered="true">
  	
-    <div ng-controller="mainController" class="ng-scope">
-        <h3>1. Click</h3>
-        <button id="firstBtn" ng-click="onSubmitBtnClick()">Click me</button>
+    <div ng-controller="drugController" class="ng-scope">
+        <h3>1. Search Drug(s)</h3>
+        <button id="drugBtn" ng-click="onDrugSearch()">Click me</button>
+    </div>
+    
+    <div ng-controller="reactionController" class="ng-scope">
+        <h3>2. Search Reaction(s)</h3>
+        <button id="reactionBtn" ng-click="onReactionSearch()">Click me</button>
     </div>
   	
 <div class="container-fluid">
@@ -125,15 +59,15 @@
       <div class="col-md-4"> </div>
       <div class="col-md-4"> 
         <div class="selection">
-          <a href="#search-drug" class="select-drug" data-toggle="tab">Drug</a>
-          <a href="#search-reaction" class="select-reaction" data-toggle="tab">Reaction</a>
+          <a href="#search-drug" class="select-drug" data-toggle="tab"></a>
+          <a href="#search-reaction" class="select-reaction" data-toggle="tab"></a>
         </div>
         
         <div class="tab-content">
         
           <form id="search-drug" class="tab-pane search-form active">
             <div>
-              <input type="text" id="keyword" class="form-control input-lg" placeholder="Drug Name">             
+              <input type="text" id="drugKeyword" class="form-control input-lg" placeholder="Drug Name">             
               <!-- <span class="input-group-addon">
                 <span class="glyphicon glyphicon-search"></span>
               </span> -->
@@ -141,15 +75,15 @@
             
             <div class="text-center add-field"><a href="#">+</a></div>
           
-	        <div id="records_table_div" class="table-responsive table-bordered table-stripped">          
-	            <table class="table" id="records_table"></table>
+	        <div id="drug_table_div" class="table-responsive table-bordered table-stripped">          
+	            <table class="table" id="drug_table"></table>
 	        </div>
             
           </form>
       
           <form id="search-reaction" class="tab-pane search-form">
             <div>
-              <input type="text" class="form-control input-lg" placeholder="Adverse Reaction">
+              <input type="text" id="reactionKeyword" class="form-control input-lg" placeholder="Adverse Reaction">
               <!-- <span class="input-group-addon">
                 <span class="glyphicon glyphicon-search"></span>
               </span> -->
@@ -157,6 +91,10 @@
         
             <div class="text-center add-field"><a href="#">+</a></div>
 
+	        <div id="reaction_table_div" class="table-responsive table-bordered table-stripped">          
+	            <table class="table" id="reaction_table"></table>
+	        </div>
+            
           </form>
 
         </div>
@@ -167,7 +105,6 @@
 
       </div>
       <div class="col-md-4"> </div>
-      
     </div>
 
     </div>

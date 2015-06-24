@@ -1,20 +1,24 @@
 <?php
-//require('../db/constant.php');
-//require('../db/database.php');
+require('../config/constant.php');
 
-/*if (!isset($_GET['keyword'])) {
+if (!isset($_GET['type'])) {
 	die("");
-}*/
-
-//$arr = json_encode($_POST);
+}
 
 if (!isset($_GET['keyword'])) {
 	die("");
 }
 
+$type = $_GET['type'];
 $keyword = $_GET['keyword'];
 
-$url = 'http://52.4.149.230:8080/openfda/service/fda/search/drug/' . $keyword . '/100';
+if($type == "reaction") {
+	$url = SEARCH_REACTION_URL . $keyword;
+}
+else {
+	$url = SEARCH_DRUG_URL . $keyword;	
+}
+
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -27,7 +31,15 @@ $StatusCode = $data->StatusCode;
 if ($StatusCode == "0"){
 	// if the call was successful there will be a 'body' containing all the data. In this case i just created an array with the results which we pull from the body.
 	$body = $data->Body;
-	$results = $body->ReportOutput->reactions;
+	
+	if($type == "reaction") {
+		//$results = $body->ReportOutput->drugs;
+		$results = $body->ReportOutput;
+	}
+	else {
+		$results = $body->ReportOutput;
+	}
+	
 	//echo '<p>' . json_encode($results) . '</p>'
 	/*$reactions = array();
 	foreach($results as $result) {
