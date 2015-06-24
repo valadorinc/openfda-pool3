@@ -25,11 +25,8 @@ public class OpenFDAResource extends ServerResource {
 		int Status = 0;
 		try {
 			
-			JSONArray Drugs = new JSONArray();
 			String ReactionList = "";
-			String Limit = "1";
 			if (getRequest().getAttributes().get("reactionlist") != null ) ReactionList = (String) getRequest().getAttributes().get("reactionlist");
-			if (getRequest().getAttributes().get("limit") != null ) Limit = (String) getRequest().getAttributes().get("limit");
 			
 			String[] reactions = ReactionList.split("~");
 			String Reaction = "";
@@ -40,38 +37,29 @@ public class OpenFDAResource extends ServerResource {
 				}
 			}
 			
-			String ServiceURI = "/event.json?search=" + Reaction + "&limit=" + Limit;
+			String ServiceURI = "/event.json?search=" + Reaction + "&count=patient.drug.medicinalproduct.exact";
 			
 
 			OpenFDAClient restClient = new OpenFDAClient();
 			JSONObject json = restClient.getService(ServiceURI);
-			JSONObject meta = json.getJSONObject("meta");
-			JSONObject metaResults = meta.getJSONObject("results");
 			JSONArray results = json.getJSONArray("results");
-
-			ArrayList<String> DrugNames = new ArrayList<String>();
-			ArrayList<String> DrugIndications = new ArrayList<String>();
-			for (int p=0; p<results.length(); p++){
-				JSONObject resultRec = results.getJSONObject(p);
-				JSONObject patient = resultRec.getJSONObject("patient");
-				JSONArray patientDrugs = patient.getJSONArray("drug");
-				for (int d=0; d<patientDrugs.length(); d++){
-					JSONObject drug = patientDrugs.getJSONObject(d);
-					String drugName = "";
-					String drugIndication = "";
-					
-					if (!drug.isNull("medicinalproduct")) drugName = drug.getString("medicinalproduct");
-					if (!drug.isNull("drugindication")) drugIndication = drug.getString("drugindication");
-					
-					DrugNames.add(drugName);
-					DrugIndications.add(drugIndication);
-				}
-				Drugs = this.dedupeDrugs(DrugNames,DrugIndications);
+			JSONArray cols = new JSONArray();
+			cols.put("Drug Name");
+			cols.put("Occurrences");
+			JSONArray rows = new JSONArray();
+			for (int i=0; i<results.length(); i++){
+				JSONArray row = new JSONArray();
+				JSONObject result = results.getJSONObject(i);
+				String Drug = result.getString("term");
+				int Occurrences = result.getInt("count");
+				row.put(Drug);
+				row.put(Occurrences);
+				rows.put(row);
 			}
+
 			
-			ReportOutput.put("total", metaResults.getInt("total"));
-			ReportOutput.put("limit", metaResults.getInt("limit"));
-			ReportOutput.put("drugs", Drugs);
+			ReportOutput.put("cols", cols);
+			ReportOutput.put("rows", rows);
 
 //logger.debug(metaResults.toString(1));			
 			
@@ -91,50 +79,6 @@ public class OpenFDAResource extends ServerResource {
 		rep = new JsonRepresentation(jResponse.getResponse(jResponse));
 		return rep;
 	}
-	
-	private JSONArray dedupeDrugs(ArrayList<String> drugNames, ArrayList<String> drugIndications){
-		ArrayList<String> uniqueNames = new ArrayList<String>();
-		JSONArray cleanList = new JSONArray();
-		try{
-			for (int i=0; i<drugNames.size(); i++){
-				String dName = drugNames.get(i);
-				int dIndex = uniqueNames.indexOf(dName);
-				if (dIndex == -1){
-					String dIndic = drugIndications.get(i);
-					uniqueNames.add(dName);
-					JSONObject Drug = new JSONObject();
-					Drug.put("DrugName", dName);
-					Drug.put("DrugIndication", dIndic);
-					cleanList.put(Drug);
-				}
-			}
-//			ArrayList<String> dNames = new ArrayList<String>();
-//			ArrayList<String> dInds = new ArrayList<String>();
-//			for (int n=0; n<cleanList.length(); n++){
-//				JSONObject jD = cleanList.getJSONObject(n);
-//				dNames.add(jD.getString("DrugName"));
-//				dInds.add(jD.getString("DrugIndication"));
-//			}
-//			JSONArray jSorted = new JSONArray();
-//			ArrayList<String> SortOrder = dNames;
-//			Collections.sort(SortOrder);
-//			for (int i=0; i<SortOrder.size(); i++){
-//				String dname = SortOrder.get(i);
-//				int sIdx = dNames.indexOf(dname);
-//				JSONObject jRec = new JSONObject();
-//				jRec.put("DrugName", dNames.get(sIdx));
-//				jRec.put("DrugIndication", dInds.get(sIdx));
-//				jSorted.put(jRec);
-//			}
-//			cleanList = jSorted;
-			
-			
-		} catch(Exception e){
-			
-		}
-		return cleanList;
-	}
-	
 
 }
 

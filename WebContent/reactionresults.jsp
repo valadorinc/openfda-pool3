@@ -6,10 +6,8 @@
 
 String Reaction = "";
 String Reaction2 = "";
-String Limit = "";
 if (request.getParameter("reaction1") !=null) Reaction = request.getParameter("reaction1");
 if (request.getParameter("reaction2") !=null) Reaction2 = request.getParameter("reaction2");
-if (request.getParameter("limit") !=null) Limit = request.getParameter("limit");
 
 String Message = "";
 String Records = "";
@@ -20,21 +18,28 @@ if (!Reaction.equals("0")){
 	    String ReactionList = "";
 	    ReactionList += Reaction;
 	    if (!Reaction2.equals("0")) ReactionList += "~" + Reaction2;
-		String ServiceURI = "/fda/search/reaction/" + ReactionList + "/" + Limit;
+		String ServiceURI = "/fda/search/reaction/" + ReactionList;
 	
 		RestClient restClient = new RestClient();
 		JSONObject jResponse = restClient.getService(ServiceURI);
 	 	JSONObject jBody = jResponse.getJSONObject("Body");
-	 	JSONArray jRecords = new JSONArray();
-		jRecords = jBody.getJSONObject("ReportOutput").getJSONArray("drugs");
+	 	
+		JSONArray cols = jBody.getJSONObject("ReportOutput").getJSONArray("cols");
+		JSONArray rows = jBody.getJSONObject("ReportOutput").getJSONArray("rows");
 	
 		Records = "<table>";
-		Records += "<tr><th>Drug Name</th><th>Drug Indication</></tr>";
-		for (int i=0; i<jRecords.length(); i++){
-			JSONObject jRec = jRecords.getJSONObject(i);
-			String DrugName = jRec.getString("DrugName");
-			String DrugIndication = jRec.getString("DrugIndication");
-			Records += "<tr><td>" + DrugName + "</td><td>" + DrugIndication + "</td></tr>";
+		Records += "<tr>";
+		for (int i=0; i<cols.length(); i++){
+			Records += "<th>" + cols.getString(i) + "</th>";
+		}
+		Records += "</tr>";
+		for (int i=0; i<rows.length(); i++){
+			Records += "<tr>";
+			for (int c=0; c<cols.length(); c++){
+				JSONArray row = rows.getJSONArray(i);
+				Records += "<td>" + row.getString(c) + "</td>";
+			}
+			Records += "</tr>";
 		}
 		Records += "</table>";
 		
