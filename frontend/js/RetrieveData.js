@@ -1,27 +1,29 @@
-$( document ).ready(function() {
-	//$("#submit").keyup(function() {
-	$( "#submit" ).click(function(e) {
-		  e.preventDefault();
-		  //alert( "Handler for .click() called." );
-		  var keyword = $("#keyword").val();
-		  
-		  $.get( "data/OpenFdaDataRetrieval.php", { keyword: keyword } )
-		  //$.get( "data/OpenFdaDataRetrieval.php" )
-			.done(function( data ) {
-				$('#openfdaresults').html('');
-				var results = jQuery.parseJSON(data);
-				$(results).each(function(key, value) {
-					$('#openfdaresults').append('<div class="item">' + value + '</div>');
-				})
 
-			    /*$('.item').click(function() {
-			    	var text = $(this).html();
-			    	$('#keyword').val(text);
-			    })*/
+var app = angular.module("mainModule", []);
 
-			});
-		/*} else {
-			$('#openfdaresults').html('');
-		}*/
-	});
+app.controller("mainController", function($scope, $http) {
+
+	  $scope.onSubmitBtnClick = function () {
+
+		    var keyword = $("#keyword").val();
+		    
+		    $.get('data/OpenFdaDataRetrieval.php', {keyword:keyword}).
+		      success(function(response) {
+			    	response = JSON.parse(response);
+			    	
+			    	$(function() {
+			    	    $.each(response, function(i, item) {
+			    	        var $tr = $('<tr>').append(
+			    	            $('<td>').text(item.reaction),
+			    	            $('<td>').text(item.count),
+			    	            $('<td>').text(item.term)
+			    	        );
+			    	        $('#records_table').append($tr);
+			    	    });
+			    	});
+		      }).
+		      error(function(response) {
+		    	  alert('error');
+		      });
+	  };
 });
