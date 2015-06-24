@@ -6,8 +6,9 @@ define('DB_PASSWORD', "applicationrx");
 define('DB_DATABASE', "applicationrx");
 define('DB_DRIVER', "mysql");
 
+//API
+define('API_KEY', "JXwmbJf2+_=eG&+e");
+
 //Service URL constants
-define('SEARCH_REACTION_URL', "http://applicationrx.valador.net:8080/openfda/service/fda/search/reaction/");
-define('SEARCH_DRUG_URL', "http://applicationrx.valador.net:8080/openfda/service/fda/search/drug/");
-define('LOOKUP_REACTION_URL', "http://applicationrx.valador.net:8080/openfda/service/fda/lookup/reactions/");
-define('LOOKUP_DRUG_URL', "http://applicationrx.valador.net:8080/openfda/service/fda/lookup/drugs/");
+define('API_SERVICE_BASE_URL', "http://applicationrx.valador.net:8080/openfda/service/fda/");
+

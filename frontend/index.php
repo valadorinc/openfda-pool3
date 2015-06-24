@@ -1,7 +1,3 @@
-
-<!-- $contents = file_get_contents('index.html'); -->
-<!-- echo $contents; -->
-
 <!DOCTYPE html>
 <html ng-app="mainModule">
 <head>

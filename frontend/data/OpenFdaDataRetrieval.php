@@ -12,11 +12,17 @@ if (!isset($_GET['keyword'])) {
 $type = $_GET['type'];
 $keyword = $_GET['keyword'];
 
+$type = strip_tags($type);
+$type = htmlspecialchars($type);
+$keyword = strip_tags($keyword);
+$keyword = htmlspecialchars($keyword);
+$keyword = urlencode($keyword);
+
 if($type == "reaction") {
-	$url = SEARCH_REACTION_URL . $keyword;
+	$url = API_SERVICE_BASE_URL . API_KEY . '/search/reaction/' . $keyword;
 }
 else {
-	$url = SEARCH_DRUG_URL . $keyword;	
+	$url = API_SERVICE_BASE_URL . API_KEY . '/search/drug/' . $keyword;
 }
 
 $ch = curl_init();
@@ -39,16 +45,7 @@ if ($StatusCode == "0"){
 	else {
 		$results = $body->ReportOutput;
 	}
-	
-	//echo '<p>' . json_encode($results) . '</p>'
-	/*$reactions = array();
-	foreach($results as $result) {
-		
-		$reaction = $result->term;
-		$reactions[] = $reaction;
-	}*/
-	//echo json_encode($reactions, JSON_HEX_APOS);
-	//echo json_encode($results, JSON_HEX_APOS);
+
 	echo json_encode($results);
 }
 
