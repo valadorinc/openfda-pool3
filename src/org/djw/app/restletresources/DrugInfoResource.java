@@ -1,6 +1,7 @@
 package org.djw.app.restletresources;
 
 
+import openfda.classes.DailyMedClient;
 import openfda.classes.OpenFDAClient;
 import openfda.classes.ServerAuth;
 
@@ -46,14 +47,31 @@ public class DrugInfoResource extends ServerResource {
 					JSONObject drug = results.getJSONObject(0);
 					JSONObject openfda = drug.getJSONObject("openfda");
 					spl_set_id = openfda.getJSONArray("spl_set_id").getString(0);
-					
 				}
 				
 				int numResults = results.length();
+				
+				ServiceURI = "/services/v2/spls/" + spl_set_id + "/media.json";
+				DailyMedClient medClient = new DailyMedClient();
+				JSONObject jsonMed = medClient.getService(ServiceURI);
+				JSONObject data = jsonMed.getJSONObject("data");
+				JSONArray media = data.getJSONArray("media");
+				
+				JSONArray images = new JSONArray();
+				for (int i=0; i<media.length(); i++){
+					JSONObject rec = media.getJSONObject(i);
+					if (rec.getString("mime_type").equals("image/jpeg")){
+						String ImageURL = rec.getString("url");
+						images.put(ImageURL);
+					}
+				}
+
 				Message = "";
 				Status = 0;
 				jBody.put("count", numResults);
 				jBody.put("spl_set_id", spl_set_id);
+				jBody.put("jsonMed", media);
+				jBody.put("images", images);
 			} catch (Exception e){
 				Status = 1;
 				Message = "an error occurred: " + e;
