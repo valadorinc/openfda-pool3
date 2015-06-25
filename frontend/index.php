@@ -76,7 +76,7 @@
         <!-- </div> -->
         <!-- <p class="triangle-isosceles top"></p> -->
         
-        <div class="tab-content radius-all template-bg template-border">
+        <div class="tab-content radius-all template-bg">
                     
           <form id="search-drug" class="tab-pane search-form active gradient-drug-search">
           
