@@ -34,6 +34,7 @@ public class DrugInfoResource extends ServerResource {
 			try{
 				String DrugName = "";
 				String spl_set_id = "";
+				JSONObject DrugInfo = new JSONObject();
 				if (getRequest().getAttributes().get("DrugName") != null ) DrugName = (String) getRequest().getAttributes().get("DrugName");
 		
 				String ServiceURI = "/label.json?search=openfda.substance_name:\"" + DrugName + "\"";
@@ -44,10 +45,18 @@ public class DrugInfoResource extends ServerResource {
 				if (results.length() > 0){
 					JSONObject drug = results.getJSONObject(0);
 					JSONObject openfda = drug.getJSONObject("openfda");
+//logger.debug(openfda.toString(1));
+					
+					DrugInfo.put("brand_name", openfda.getString("brand_name"));
+					DrugInfo.put("generic_name", openfda.getString("generic_name"));
+					DrugInfo.put("manufacturer_name", openfda.getString("manufacturer_name"));
+					DrugInfo.put("product_ndc", openfda.getString("product_ndc"));
+					DrugInfo.put("product_type", openfda.getString("product_type"));
+					DrugInfo.put("route", openfda.getString("route"));
+					DrugInfo.put("spl_set_id", spl_set_id);
 					spl_set_id = openfda.getJSONArray("spl_set_id").getString(0);
+					DrugInfo.put("substance_name", openfda.getString("substance_name"));
 				}
-				
-				int numResults = results.length();
 				
 				ServiceURI = "/services/v2/spls/" + spl_set_id + "/media.json";
 				DailyMedClient medClient = new DailyMedClient();
@@ -63,13 +72,10 @@ public class DrugInfoResource extends ServerResource {
 						images.put(ImageURL);
 					}
 				}
-
 				Message = "";
 				Status = 0;
-				jBody.put("count", numResults);
-				jBody.put("spl_set_id", spl_set_id);
-				jBody.put("jsonMed", media);
-				jBody.put("images", images);
+				DrugInfo.put("images", images);
+				jBody.put("DrugInfo", DrugInfo);
 			} catch (Exception e){
 				Status = 1;
 				Message = "an error occurred: " + e;
