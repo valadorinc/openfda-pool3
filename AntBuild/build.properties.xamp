@@ -1,0 +1,19 @@
+root.dir=..
+lib.dir=WebContent/WEB-INF/lib
+src.dir=src
+conf.dir=etc
+web.content=WebContent
+project.name=openfda
+build.dir=build
+dist.dir=dist
+dev.manager=http://localhost:8080/manager/text
+manager.username=admin
+manager.password=Valador-123
+webapp.name=openfda
+#webapp.env=prod
+tomcat.home=C:/xampp/tomcat
+tomcat.logs=C:/xampp/tomcat/logs
+
+#prod properties
+prod.php.home=/var/www/html
+prod.php.filedir=/frontend

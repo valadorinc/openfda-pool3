@@ -10,7 +10,7 @@ compile was remove install remove phpprod
 -->
 <project name="AppBuilder" default="war" basedir="..">
 
-	<property file="AntBuild/build.properties"/>
+	<property file="AntBuild/build.properties.${webapp.env}"/>
 	
 	<path id="classpath">
  		<fileset dir="${lib.dir}" includes="servlet-api.jar"/>
