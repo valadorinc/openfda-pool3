@@ -74,6 +74,14 @@ h1 a {
   background-color: #f2f2f2;
   cursor: pointer;
 }
+
+#myDiv span
+{
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+
 /* Override Bootstrap Styles */
 .other-color {
   background: green !important;
