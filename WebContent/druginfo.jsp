@@ -23,9 +23,10 @@ if (!DrugName.equals("")){
 	
 		RestClient restClient = new RestClient();
 		JSONObject jResponse = restClient.getService(ServiceURI);
-//out.println(jResponse.toString());
+out.println(jResponse.toString());
  	 	JSONObject jBody = jResponse.getJSONObject("Body");
-	 	images = jBody.getJSONArray("images");
+ 	 	JSONObject DrugInfo = jBody.getJSONObject("DrugInfo");
+	 	images = DrugInfo.getJSONArray("images");
  		
 	 	for (int i=0; i<images.length(); i++){
 	 		Images += "'<img src='" + images.getString(i) + "'><br>";
