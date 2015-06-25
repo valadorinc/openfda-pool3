@@ -42,7 +42,11 @@ if (!Reaction.equals("0")){
 			Records += "<tr>";
 			for (int c=0; c<cols.length(); c++){
 				JSONArray row = rows.getJSONArray(i);
-				Records += "<td>" + row.getString(c) + "</td>";
+				String dat = row.getString(c);
+				if (c == 0){
+					dat = "<a href='druginfo.jsp?DrugName=" + dat + "'>" + dat + "</a>";
+				}
+				Records += "<td>" + dat + "</td>";
 			}
 			Records += "</tr>";
 		}

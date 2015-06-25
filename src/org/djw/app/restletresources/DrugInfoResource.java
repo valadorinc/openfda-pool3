@@ -6,8 +6,6 @@ import openfda.classes.OpenFDAClient;
 import openfda.classes.ServerAuth;
 
 import org.apache.log4j.Logger;
-import org.djw.tools.db.DBTableJNDI;
-import org.djw.tools.json.OutputFormatter;
 import org.djw.tools.json.ResponseJson;
 import org.json.JSONArray;
 import org.json.JSONException;
