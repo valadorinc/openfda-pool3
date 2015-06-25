@@ -12,3 +12,4 @@ define('API_KEY', "JXwmbJf2+_=eG&+e");
 //Service URL constants
 define('API_SERVICE_BASE_URL', "http://applicationrx.valador.net:8080/openfda/service/fda/");
 
+

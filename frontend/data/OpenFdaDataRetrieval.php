@@ -21,7 +21,10 @@ $keyword = urlencode($keyword);
 if($type == "reaction") {
 	$url = API_SERVICE_BASE_URL . API_KEY . '/search/reaction/' . $keyword;
 }
-else {
+else if($type == "drugInfo") {
+	$url = API_SERVICE_BASE_URL . API_KEY . '/druginfo/' . $keyword;
+}
+else { //$type == "drug"
 	$url = API_SERVICE_BASE_URL . API_KEY . '/search/drug/' . $keyword;
 }
 
@@ -41,6 +44,9 @@ if ($StatusCode == "0"){
 	if($type == "reaction") {
 		//$results = $body->ReportOutput->drugs;
 		$results = $body->ReportOutput;
+	}
+	else if($type == "drugInfo") {
+		$results = $body;
 	}
 	else {
 		$results = $body->ReportOutput;
