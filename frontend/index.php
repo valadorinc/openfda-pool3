@@ -59,9 +59,27 @@
           <a href="#search-reaction" class="select-reaction" data-toggle="tab"></a>
         </div>
         
-        <div class="tab-content">
+        <!-- <div class="selection-left"></div> -->
         
-          <form id="search-drug" class="tab-pane search-form active">
+        <!-- <div class="row"> -->
+            <!-- <div class="col-xs-6"> -->
+                <!-- <div class="mini-box">1</div> -->
+                <!-- <div class="selection-left triangle-with-shadow"></div> -->
+            <!-- </div> -->
+            <!-- <div class="col-xs-6"> -->
+                <!-- <div class="mini-box">2</div> -->
+                <!-- <div class="selection-left triangle-with-shadow"></div> -->
+            <!-- </div> -->
+        
+            <!-- <div class="col-xs-6"><div class="mini-box">1</div></div> -->
+            <!-- <div class="col-xs-6"><div class="mini-box">2</div></div> -->
+        <!-- </div> -->
+        <!-- <p class="triangle-isosceles top"></p> -->
+        
+        <div class="tab-content radius-all template-bg template-border">
+                    
+          <form id="search-drug" class="tab-pane search-form active gradient-drug-search">
+          
             <div>
               <input type="text" id="drugKeyword" class="form-control input-lg" placeholder="Drug Name">             
               <!-- <span class="input-group-addon">
@@ -77,7 +95,7 @@
             
           </form>
       
-          <form id="search-reaction" class="tab-pane search-form">
+          <form id="search-reaction" class="tab-pane search-form gradient-reaction-search">
             <div>
               <input type="text" id="reactionKeyword" class="form-control input-lg" placeholder="Adverse Reaction">
               <!-- <span class="input-group-addon">
@@ -91,18 +109,16 @@
 	            <table class="table" id="reaction_table"></table>
 	        </div>
             
+            <div id="drug-info"></div>
+            
           </form>
 
-        </div>
-        
-        <div class="text-right">
-          <h3><span class="label label-info"><a href="#">?</a></span></h3>
         </div>
 
       </div>
       <div class="col-md-4"> </div>
+      
     </div>
-
     </div>
 
 </body>
