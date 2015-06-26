@@ -1,20 +1,22 @@
-  $(function() {
-    function log( message ) {
+    
+$(function() {
+	  
+	  function log( message ) {
       $( "<div>" ).text( message ).prependTo( "#log" );
       $( "#log" ).scrollTop( 0 );
     }
-
-    var drugKeyword = $("#drugKeyword").val();
-    var reactionKeyword = $("#reactionKeyword").val();
-    
-    $( "#drugKeyword" ).autocomplete({
+       
+    $( "#autocomplete-input-drug" ).autocomplete({
       source: function( request, response ) {
+    	  
+    	var keyword = request.term.replace(/\s/g, "%20");
+    	  
         $.ajax({
           url: "autocomplete/auto-complete.php",
           dataType: "json",
           data: {
-        	type: 'drug',
-            keyword: request.term
+        	type: $( "#autocomplete-input-drug" ).attr( "name" ),
+            keyword: keyword
           },
           success: function( data ) {
             response( data );
@@ -28,20 +30,20 @@
           "Nothing selected, input was " + this.value);
       },
       open: function() {
-        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        //$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
       },
       close: function() {
-        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+        //$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
       }
     });
     
-    $( "#reactionKeyword" ).autocomplete({
+    $( "#autocomplete-input-reaction" ).autocomplete({
         source: function( request, response ) {
           $.ajax({
             url: "autocomplete/auto-complete.php",
             dataType: "json",
             data: {
-              type: 'reaction',
+              type: $( "#autocomplete-input-reaction" ).attr( "name" ),
               keyword: request.term
             },
             success: function( data ) {
@@ -56,11 +58,10 @@
             "Nothing selected, input was " + this.value);
         },
         open: function() {
-          $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+          //$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
         },
         close: function() {
-          $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+          //$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
         }
-      });
-    
+      });    
   });

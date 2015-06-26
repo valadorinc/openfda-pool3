@@ -7,7 +7,14 @@ app.controller("drugController", function($scope, $http) {
 	
 	  $scope.onDrugSearch = function () {
 
-		    var keyword = $("#drugKeyword").val();
+		    var keywordArr = new Array();  
+		  
+		    $('#drug-input-control').children('.autocomplete-item').each(function () {
+		    	var value = this.textContent || this.innerText || getText( this );		    	
+		    	keywordArr.push(value);
+		    });
+		    
+		    keyword = keywordArr.join("~");
 		    
 		    $.get('data/OpenFdaDataRetrieval.php', {keyword:keyword, type:'drug'}).
 		      success(function(response) {
@@ -37,7 +44,14 @@ app.controller("reactionController", function($scope, $http) {
 	
 	  $scope.onReactionSearch = function () {
 
-		    var keyword = $("#reactionKeyword").val();
+		    var keywordArr = new Array();  
+			  
+		    $('#reaction-input-control').children('.autocomplete-item').each(function () {
+		    	var value = this.textContent || this.innerText || getText( this );		    	
+		    	keywordArr.push(value);
+		    });
+		    
+		    keyword = keywordArr.join("~");
 		    
 		    $.get('data/OpenFdaDataRetrieval.php', {keyword:keyword, type:'reaction'}).
 		      success(function(response) {
@@ -108,6 +122,40 @@ function drugLabelsDisplay(drugName) {
     });
 }
 
+/**
+ * Utility function for retrieving the text value of an array of DOM nodes
+ * @param {Array|Element} elem
+ */
+function getText( elem ) {
+	var node,
+		ret = "",
+		i = 0,
+		nodeType = elem.nodeType;
+
+	if ( !nodeType ) {
+		// If no nodeType, this is expected to be an array
+		while ( (node = elem[i++]) ) {
+			// Do not traverse comment nodes
+			ret += getText( node );
+		}
+	} else if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
+		// Use textContent for elements
+		// innerText usage removed for consistency of new lines (jQuery #11153)
+		if ( typeof elem.textContent === "string" ) {
+			return elem.textContent;
+		} else {
+			// Traverse its children
+			for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
+				ret += getText( elem );
+			}
+		}
+	} else if ( nodeType === 3 || nodeType === 4 ) {
+		return elem.nodeValue;
+	}
+	// Do not include comment or processing instruction nodes
+
+	return ret;
+};
 
 app.controller("resetController", function($scope) {
 	$scope.reset = function () {
