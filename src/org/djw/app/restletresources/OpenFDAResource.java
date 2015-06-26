@@ -36,6 +36,7 @@ public class OpenFDAResource extends ServerResource {
 				if (getRequest().getAttributes().get("reactionlist") != null)
 					ReactionList = (String) getRequest().getAttributes().get(
 							"reactionlist");
+ReactionList = ReactionList.replace("%7E","~");
 
 				String[] reactions = ReactionList.split("~");
 				String Reaction = "";
@@ -49,6 +50,14 @@ public class OpenFDAResource extends ServerResource {
 
 				String ServiceURI = "/event.json?search=" + Reaction
 						+ "&count=patient.drug.openfda.substance_name.exact";
+				if (logger.isDebugEnabled()){
+					logger.debug("ServiceURI: " + ServiceURI);
+				}
+
+
+				if (logger.isDebugEnabled()){
+					logger.debug("ServiceURI: " + ServiceURI);
+				}
 
 				OpenFDAClient restClient = new OpenFDAClient();
 				JSONObject json = restClient.getService(ServiceURI);
