@@ -4,36 +4,23 @@
     <title>ApplicationRx With Bootstrap and Angular JS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/styles.css" rel="stylesheet" media="screen">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <script src="http://code.jquery.com/jquery.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">   
+    <link href="css/jquery-ui.min-1.9.2.css" rel="stylesheet" media="screen">
+    <link href="css/autocomplete-deluxe.css" rel="stylesheet" media="screen">
+    
+    <style>
+    .ui-autocomplete-loading {
+        background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+    }
+    </style>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min-1.9.2.js"></script>    
     <script src="js/bootstrap.min.js"></script>
-    
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
-  <style>
-  .ui-autocomplete-loading {
-    background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
-  }
-  </style>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-resource.min.js">
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-route.min.js">
-   </script>
-    <!-- <script src="js/Chart.min.js"></script> -->
-    <!-- <script src="js/angular-chart.js"></script> -->
+    <script src="js/angular.min.js"></script>
     <script src="js/RetrieveData.js"></script>
-    <script src="js/auto-complete.js"></script>
-    <!--  <script src="js/test.js"></script> -->
+    <script src="js/autocomplete-deluxe.js"></script>
+    <script src="js/autocomplete.js"></script>
    
 </head>
 <!-- <body ng-app="mainModule"> -->
@@ -59,33 +46,19 @@
           <a href="#search-reaction" class="select-reaction" data-toggle="tab"></a>
         </div>
         
-        <!-- <div class="selection-left"></div> -->
-        
-        <!-- <div class="row"> -->
-            <!-- <div class="col-xs-6"> -->
-                <!-- <div class="mini-box">1</div> -->
-                <!-- <div class="selection-left triangle-with-shadow"></div> -->
-            <!-- </div> -->
-            <!-- <div class="col-xs-6"> -->
-                <!-- <div class="mini-box">2</div> -->
-                <!-- <div class="selection-left triangle-with-shadow"></div> -->
-            <!-- </div> -->
-        
-            <!-- <div class="col-xs-6"><div class="mini-box">1</div></div> -->
-            <!-- <div class="col-xs-6"><div class="mini-box">2</div></div> -->
-        <!-- </div> -->
-        <!-- <p class="triangle-isosceles top"></p> -->
-        
         <div class="tab-content radius-all template-bg">
                     
           <form id="search-drug" class="tab-pane search-form active gradient-drug-search">
           
             <div>
-              <input type="text" id="drugKeyword" class="form-control input-lg" placeholder="Drug Name">             
-              <!-- <span class="input-group-addon">
-                <span class="glyphicon glyphicon-search"></span>
-              </span> -->
+              <input type="text" id="drugKeyword" class="form-control input-lg" placeholder="Drug Name">
             </div>
+            
+			<div id="drug-input-control" class="autocomplete-container autocomplete-multiple">
+			    <div class="form-type-textfield form-item-field-keywords-und-value-field form-item form-group input-lg">
+				    <input placeholder="Drug Name" class="autocomplete-form form-control form-text jquery-once-2-processed ui-autocomplete-input autocomplete-multiple ui-autocomplete-loading" id="autocomplete-input-drug" style="width: 85px;" type="text" name="drug" value="" size="60" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+		        </div>
+		    </div>              
             
             <div class="text-center add-field"><a href="#">+</a></div>
           
@@ -98,10 +71,13 @@
           <form id="search-reaction" class="tab-pane search-form gradient-reaction-search">
             <div>
               <input type="text" id="reactionKeyword" class="form-control input-lg" placeholder="Adverse Reaction">
-              <!-- <span class="input-group-addon">
-                <span class="glyphicon glyphicon-search"></span>
-              </span> -->
             </div>
+              
+		    <div id="reaction-input-control" class="autocomplete-container autocomplete-multiple">
+			    <div class="form-type-textfield form-item-field-keywords-und-value-field form-item form-group input-lg">
+			        <input placeholder="Adverse Reaction" class="autocomplete-form form-control form-text jquery-once-2-processed ui-autocomplete-input autocomplete-multiple ui-autocomplete-loading" id="autocomplete-input-reaction" style="width: 125px;" type="text" name="reaction" value="" size="60" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+			    </div>
+	        </div>              
         
             <div class="text-center add-field"><a href="#">+</a></div>
 

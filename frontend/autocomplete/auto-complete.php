@@ -13,11 +13,15 @@ if (!isset($_GET['keyword'])) {
 $type = $_GET['type'];
 $keyword = $_GET['keyword'];
 
+//$keyword = str_replace("str=", "", $keyword);
+//$keyword = str_replace("%20", " ", $keyword);
+//$keyword = substr($keyword, 4);
+
 $type = strip_tags($type);
 $type = htmlspecialchars($type);
 $keyword = strip_tags($keyword);
 $keyword = htmlspecialchars($keyword);
-$keyword = urlencode($keyword);
+//$keyword = urlencode($keyword);
 
 if($type == "reaction") {
 	$url = API_SERVICE_BASE_URL . API_KEY . '/lookup/reactions/' . $keyword;
