@@ -55,6 +55,10 @@ ReactionList = ReactionList.replace("%7E","~");
 				}
 
 
+				if (logger.isDebugEnabled()){
+					logger.debug("ServiceURI: " + ServiceURI);
+				}
+
 				OpenFDAClient restClient = new OpenFDAClient();
 				JSONObject json = restClient.getService(ServiceURI);
 				JSONArray results = json.getJSONArray("results");

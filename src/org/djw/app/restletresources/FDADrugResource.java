@@ -49,6 +49,10 @@ DrugList = DrugList.replace("%7E","~");
 				}
 	
 				String ServiceURI = "/event.json?search=" + Drug + "&count=patient.reaction.reactionmeddrapt.exact";
+				
+				if (logger.isDebugEnabled()){
+					logger.debug("ServiceURI: " + ServiceURI);
+				}
 	
 				if (logger.isDebugEnabled()){
 					logger.debug("ServiceURI: " + ServiceURI);
