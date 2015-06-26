@@ -1,5 +1,7 @@
 package org.djw.app.restletresources;
 
+import java.util.ArrayList;
+
 import openfda.classes.OpenFDAClient;
 import openfda.classes.ServerAuth;
 
@@ -38,7 +40,7 @@ public class ChartResource extends ServerResource {
 					String[] drugs = ThingList.split("~");
 					String Drug = "";
 					for (int r=0; r<drugs.length; r++){
-						Drug += "patient.drug.medicinalproduct:\"" + drugs[r] + "\"";
+						Drug += "patient.drug.openfda.substance_name:\"" + drugs[r] + "\"";
 						if (r < drugs.length -1){
 							Drug += "+AND+";
 						}
@@ -58,19 +60,22 @@ public class ChartResource extends ServerResource {
 				}
 			}
 			
-			String ServiceURI = "/event.json?search=receivedate:[20040101+TO+20150101]+AND+" + Things + "&count=receivedate";
+			String ServiceURI = "/event.json?search=" + Things + "&count=patient.patientonsetage";
 	
 			try{
 				OpenFDAClient restClient = new OpenFDAClient();
 				JSONObject json = restClient.getService(ServiceURI);
 				JSONArray results = json.getJSONArray("results");
+				
 				JSONArray chartHeader = new JSONArray();
 				chartHeader.put("Time");
 				chartHeader.put("Count");
 				chartdata.put(chartHeader);
+				ArrayList<String> Terms = new ArrayList<String>();
+				ArrayList<Integer> Counts = new ArrayList<Integer>();
 				for (int i=0; i<results.length(); i++){
 					JSONObject cd = results.getJSONObject(i);
-					String time = cd.getString("time");
+					String time = cd.getString("term");
 					int count = cd.getInt("count");
 					JSONArray jRec = new JSONArray();
 					jRec.put(time);
