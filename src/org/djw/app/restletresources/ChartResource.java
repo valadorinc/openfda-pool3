@@ -17,22 +17,20 @@ public class ChartResource extends ServerResource {
 	final static Logger logger = Logger.getLogger(ChartResource.class);
 	@Get
 	public Representation represent() throws JSONException {
-		
-		JSONObject jBody = new JSONObject();
+		int StatusCode = 0;
 		String Message = "";
-		int Status = 0;
 		String ServerKey = "";
 		if (getRequest().getAttributes().get("ServerKey") != null ) ServerKey = (String) getRequest().getAttributes().get("ServerKey");
 		ServerAuth serverAuth = new ServerAuth();
 		boolean Authenticated = serverAuth.authenticate(ServerKey);
-
+		JSONObject jBody = new JSONObject();
 		if (Authenticated){
-	
 			JSONArray chartdata = new JSONArray();
 			String ResultType = "";
 			if (getRequest().getAttributes().get("ResultType") != null ) ResultType = (String) getRequest().getAttributes().get("ResultType");
 			String ThingList = "";
 			if (getRequest().getAttributes().get("ThingList") != null ) ThingList = (String) getRequest().getAttributes().get("ThingList");
+			
 			
 			String Things = "";
 			if (!ResultType.equals("")){
@@ -84,14 +82,14 @@ public class ChartResource extends ServerResource {
 			} catch (Exception e){
 				logger.fatal("an error has occurred: " + e);
 			}
+			StatusCode = 0;
 		} else {
-			Status = 1;
-			Message = "invalid authentication token";
-		}		
-		
+			StatusCode = 1;
+			Message = "Invalid authorization key.";
+		}
 		ResponseJson jResponse = new ResponseJson();
 		Representation rep = null;
-		jResponse.setStatusCode(Status);
+		jResponse.setStatusCode(StatusCode);
 		jResponse.setStatusMessage(Message);
 		jResponse.setBody(jBody);
 		rep = new JsonRepresentation(jResponse.getResponse(jResponse));

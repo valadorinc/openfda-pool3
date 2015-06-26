@@ -52,7 +52,8 @@ String Message = "";
   		var jsonData = <%=sResponse%>;
         var data = google.visualization.arrayToDataTable(jsonData);
         var options = {
-          title: 'Adverse Reactions'
+          title: 'Adverse Reactions',
+          width: "100%"
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
@@ -68,6 +69,9 @@ String Message = "";
       else if (window.attachEvent) {
           window.attachEvent('onresize', resizeHandler);
       }
+      
+      window.onload = resize();
+      window.onresize = resize;
     </script>
 
 </head>

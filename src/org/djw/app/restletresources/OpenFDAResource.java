@@ -54,6 +54,10 @@ public class OpenFDAResource extends ServerResource {
 				}
 
 
+				if (logger.isDebugEnabled()){
+					logger.debug("ServiceURI: " + ServiceURI);
+				}
+
 				OpenFDAClient restClient = new OpenFDAClient();
 				JSONObject json = restClient.getService(ServiceURI);
 				JSONArray results = json.getJSONArray("results");
