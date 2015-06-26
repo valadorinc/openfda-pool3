@@ -4,3 +4,7 @@ frontend/.buildpath
 .settings/org.eclipse.php.core.prefs
 frontend/search_drug.php
 frontend/search_reaction.php
+frontend/less/prepros.cfg
+frontend/less/styles-dist.css
+frontend/less/styles.css
+frontend/prepros.cfg
