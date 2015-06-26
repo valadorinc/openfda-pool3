@@ -28,12 +28,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-resource.min.js">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-route.min.js">
-   </script>
+   	</script>
     <!-- <script src="js/Chart.min.js"></script> -->
     <!-- <script src="js/angular-chart.js"></script> -->
     <script src="js/RetrieveData.js"></script>
     <script src="js/auto-complete.js"></script>
     <!--  <script src="js/test.js"></script> -->
+    
+    <!-- google chart -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <!-- google chart end -->
+    
+    <!-- bootstrap gallery -->
+    <script src="js/photo-gallery.js"></script>
+    <!-- bootstrap gallery end -->
    
 </head>
 <!-- <body ng-app="mainModule"> -->
@@ -91,16 +99,16 @@
               </span> -->
             </div>
             
-            <div class="text-center add-field"><a href="#">+</a></div>
+            <!--div class="text-center add-field"><a href="#">+</a></div>-->
           
 	        <div id="drug_table_div" class="table-responsive table-bordered table-stripped">          
 	            <table class="table" id="drug_table"></table>
 	        </div>
-	        <div id="stat_div"></div>
+	        <div id="drug_stat_div"></div>
 	        <div id="btnDiv" ng-controller="btnController" class="ng-scope">
 	        </br>       	
 	        	<div id="statBtn">
-	        		<button id="statBtn" ng-click="displayStat()">Statistic</button>
+	        		<button id="statBtn" ng-click="displayDrugStat()">Statistic</button>
 	        	</div>	
 	        	<div id="resetBtn">
             		<button id="resetBtn" ng-click="reset()">Reset</button>
@@ -116,17 +124,17 @@
               </span> -->
             </div>
         
-            <div class="text-center add-field"><a href="#">+</a></div>
+            <!--div class="text-center add-field"><a href="#">+</a></div>-->
 
 	        <div id="reaction_table_div" class="table-responsive table-bordered table-stripped">          
 	            <table class="table" id="reaction_table"></table>
 	        </div>
-            <div id="drug-info"></div>
-            <div id="stat_div"></div>
+            <div id="drug-info" class="container"></div>
+            <div id="reaction_stat_div"></div>
             <div id="btnDiv" ng-controller="btnController" class="ng-scope">	
             </br>        	
 	        	<div id="statBtn">
-	        		<button id="statBtn" ng-click="displayStat()">Statistic</button>
+	        		<button id="statBtn" ng-click="displayReactionStat()">Statistic</button>
 	        	</div>	
 	        	<div id="resetBtn">
             		<button id="resetBtn" ng-click="reset()">Reset</button>

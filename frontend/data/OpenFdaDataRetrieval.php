@@ -24,6 +24,12 @@ if($type == "reaction") {
 else if($type == "drugInfo") {
 	$url = API_SERVICE_BASE_URL . API_KEY . '/druginfo/' . $keyword;
 }
+else if($type == "drugChart"){
+	$url = API_SERVICE_BASE_URL . API_KEY . '/chart/drug/' . $keyword;
+}
+else if($type == "reactionChart"){
+	$url = API_SERVICE_BASE_URL . API_KEY . '/chart/reaction/' . $keyword;
+}
 else { //$type == "drug"
 	$url = API_SERVICE_BASE_URL . API_KEY . '/search/drug/' . $keyword;
 }
@@ -46,6 +52,9 @@ if ($StatusCode == "0"){
 		$results = $body->ReportOutput;
 	}
 	else if($type == "drugInfo") {
+		$results = $body;
+	}
+	else if($type == "reactionChart") {
 		$results = $body;
 	}
 	else {
