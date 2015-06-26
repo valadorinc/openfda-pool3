@@ -40,6 +40,7 @@ public class LookupResource extends ServerResource {
 			String dbType = "";
 			String sqlStatement = "";
 			
+Partial = Partial.replace("%20"," ");
 			if (LookupType.equals("reactions")){
 				sqlStatement = "select reaction from reactions ";
 				if (!Partial.equals("")){
@@ -55,6 +56,10 @@ public class LookupResource extends ServerResource {
 				sqlStatement += "order by drugname";
 			}
 	
+				if (logger.isDebugEnabled()){
+					logger.debug("sqlStatement: " + sqlStatement);
+				}
+
 			DBTableJNDI dbTable = new DBTableJNDI();
 			dbTable = dbTable.getDBTableResults(sqlStatement, dbType);
 			OutputFormatter formatter = new OutputFormatter();

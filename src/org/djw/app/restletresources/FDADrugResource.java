@@ -49,6 +49,10 @@ public class FDADrugResource extends ServerResource {
 	
 				String ServiceURI = "/event.json?search=" + Drug + "&count=patient.reaction.reactionmeddrapt.exact";
 	
+				if (logger.isDebugEnabled()){
+					logger.debug("ServiceURI: " + ServiceURI);
+				}
+
 				OpenFDAClient restClient = new OpenFDAClient();
 				JSONObject json = restClient.getService(ServiceURI);
 				JSONArray results = json.getJSONArray("results");
