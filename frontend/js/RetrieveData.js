@@ -109,14 +109,20 @@ function drugLabelsDisplay(drugName) {
 }
 
 
-app.controller("resetController", function($scope) {
+app.controller("btnController", function($scope) {
 	$scope.reset = function () {
 		document.getElementById("reaction_table").innerHTML = "";
 		document.getElementById("reaction_table_div").style.display = "none";
 		document.getElementById("drug_table").innerHTML = "";
 		document.getElementById("drug_table_div").style.display = "none";
+		document.getElementById("drug-info").innerHTML = "";
+		document.getElementById("stat_div").innerHTML = "";
+		document.getElementById("drugKeyword").value = ""; 
 		document.getElementById("reactionKeyword").value = "";
-		document.getElementById("drugKeyword").value = "";
 	};
 	
+	$scope.displayStat = function () {
+
+	};	
 });
+

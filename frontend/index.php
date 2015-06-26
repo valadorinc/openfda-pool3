@@ -48,10 +48,10 @@
         <h3>2. Search Reaction(s)</h3>
         <button id="reactionBtn" ng-click="onReactionSearch()">Click me</button>
     </div>
-    <div id="cancelBtnDiv" ng-controller="resetController" class="ng-scope">
+    <!--div id="cancelBtnDiv" ng-controller="resetController" class="ng-scope">
     	<h3>3. Reset All</h3>
-    	<button id="cancelBtn" ng-click="reset()">Click me</button>
-    </div>
+    	<button id="resetBtn" ng-click="reset()">Reset!</button>
+    </div>  -->
   	
 <div class="container-fluid">
     <div class="row">
@@ -96,10 +96,16 @@
 	        <div id="drug_table_div" class="table-responsive table-bordered table-stripped">          
 	            <table class="table" id="drug_table"></table>
 	        </div>
-	        
-            <!--div id="cancelBtnDiv" ng-controller="resetController" class="ng-scope">
-    			<button id="cancelBtn" ng-click="reset()">Reset!</button>
-    		</div>  -->
+	        <div id="stat_div"></div>
+	        <div id="btnDiv" ng-controller="btnController" class="ng-scope">
+	        </br>       	
+	        	<div id="statBtn">
+	        		<button id="statBtn" ng-click="displayStat()">Statistic</button>
+	        	</div>	
+	        	<div id="resetBtn">
+            		<button id="resetBtn" ng-click="reset()">Reset</button>
+            	</div>
+            </div>
           </form>
       
           <form id="search-reaction" class="tab-pane search-form gradient-reaction-search">
@@ -115,15 +121,23 @@
 	        <div id="reaction_table_div" class="table-responsive table-bordered table-stripped">          
 	            <table class="table" id="reaction_table"></table>
 	        </div>
-            
             <div id="drug-info"></div>
+            <div id="stat_div"></div>
+            <div id="btnDiv" ng-controller="btnController" class="ng-scope">	
+            </br>        	
+	        	<div id="statBtn">
+	        		<button id="statBtn" ng-click="displayStat()">Statistic</button>
+	        	</div>	
+	        	<div id="resetBtn">
+            		<button id="resetBtn" ng-click="reset()">Reset</button>
+            	</div>
+            </div>
           </form>
 
       </div>
       <div class="col-md-4"> </div>
       
     </div>
-    </div>
-
+</div>
 </body>
 </html>
