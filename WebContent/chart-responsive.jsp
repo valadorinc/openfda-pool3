@@ -5,6 +5,33 @@
 <%@ page import="openfda.classes.ServerAuth" %>
 <%
 
+String Thing1 = "abdominal pain";
+String Thing2 = "";
+String ThingType = "reactions";
+
+String ThingList = "";
+
+if (request.getParameter("Thing1") !=null) {
+	Thing1 = request.getParameter("Thing1");
+} else {
+	Thing1 = "PREDNISONE";
+}
+if (request.getParameter("Thing2") !=null) {
+	Thing2 = request.getParameter("Thing2");
+	ThingList = Thing1 + "~" + Thing2;
+} else {
+	Thing2 = "";
+	ThingList = Thing1;
+}
+if (request.getParameter("ThingType") !=null) {
+	ThingType = request.getParameter("ThingType");
+} else {
+	ThingType = "drugs";
+}
+
+
+
+
 /* String Reaction = "";
 String Reaction2 = "";
 String Limit = "";
@@ -23,7 +50,10 @@ String Message = "";
 	try {
 		int StatusCode = 0;
 	    String JsonURL = "";
-		String ServiceURI = "/fda/" + ServerKey + "/chart/reactions/\"abdominal pain\"~death";
+		//String ServiceURI = "/fda/" + ServerKey + "/chart/reactions/\"abdominal pain\"~death";
+		//String ServiceURI = "/fda/" + ServerKey + "/chart/drugs/PREDNISONE";
+		
+		String ServiceURI = "/fda/" + ServerKey + "/chart/" + ThingType + "/" + Thing1;
 	
 		RestClient restClient = new RestClient();
 		JSONObject jResponse = restClient.getService(ServiceURI);
@@ -52,10 +82,11 @@ String Message = "";
   		var jsonData = <%=sResponse%>;
         var data = google.visualization.arrayToDataTable(jsonData);
         var options = {
-          title: 'Adverse Reactions'
+          title: 'Adverse Reactions by Age',
+          width: "100%"
         };
 
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
       
@@ -68,10 +99,26 @@ String Message = "";
       else if (window.attachEvent) {
           window.attachEvent('onresize', resizeHandler);
       }
+      
+      window.onload = resize();
+      window.onresize = resize;
     </script>
 
 </head>
 <body>
+	<div>
+		<form name="form" method="post" action="chart-responsive.jsp">
+			Type of chart:
+			<select name="ThingType">
+				<option value="drugs"<% if (ThingType.equals("drugs")){%> selected<%}%>>drugs</option>
+				<option value="reactions"<% if (ThingType.equals("reactions")){%> selected<%}%>>reactions</option>
+			</select>
+			<br>
+			Type of chart: <input type="text" name="Thing1" value="<%=Thing1%>"><br>
+			Type of chart: <input type="text" name="Thing2" value="<%=Thing2%>"><br>
+			<input type="submit">
+		</form>
+	</div>
 	<div>
 		<div id="chart_div" style="width: 100%; height: 100%;"></div>	
 	</div>

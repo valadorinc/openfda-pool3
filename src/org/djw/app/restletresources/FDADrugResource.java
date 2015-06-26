@@ -38,6 +38,7 @@ public class FDADrugResource extends ServerResource {
 				String DrugList = "";
 				if (getRequest().getAttributes().get("druglist") != null ) DrugList = (String) getRequest().getAttributes().get("druglist");
 				
+DrugList = DrugList.replace("%7E","~");
 				String[] drugs = DrugList.split("~");
 				String Drug = "";
 				for (int r=0; r<drugs.length; r++){
@@ -48,7 +49,15 @@ public class FDADrugResource extends ServerResource {
 				}
 	
 				String ServiceURI = "/event.json?search=" + Drug + "&count=patient.reaction.reactionmeddrapt.exact";
+				
+				if (logger.isDebugEnabled()){
+					logger.debug("ServiceURI: " + ServiceURI);
+				}
 	
+				if (logger.isDebugEnabled()){
+					logger.debug("ServiceURI: " + ServiceURI);
+				}
+
 				OpenFDAClient restClient = new OpenFDAClient();
 				JSONObject json = restClient.getService(ServiceURI);
 				JSONArray results = json.getJSONArray("results");
