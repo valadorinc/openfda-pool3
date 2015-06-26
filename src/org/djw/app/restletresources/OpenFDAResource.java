@@ -36,6 +36,7 @@ public class OpenFDAResource extends ServerResource {
 				if (getRequest().getAttributes().get("reactionlist") != null)
 					ReactionList = (String) getRequest().getAttributes().get(
 							"reactionlist");
+ReactionList = ReactionList.replace("%7E","~");
 
 				String[] reactions = ReactionList.split("~");
 				String Reaction = "";

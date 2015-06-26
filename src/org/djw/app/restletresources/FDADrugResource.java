@@ -38,6 +38,7 @@ public class FDADrugResource extends ServerResource {
 				String DrugList = "";
 				if (getRequest().getAttributes().get("druglist") != null ) DrugList = (String) getRequest().getAttributes().get("druglist");
 				
+DrugList = DrugList.replace("%7E","~");
 				String[] drugs = DrugList.split("~");
 				String Drug = "";
 				for (int r=0; r<drugs.length; r++){
