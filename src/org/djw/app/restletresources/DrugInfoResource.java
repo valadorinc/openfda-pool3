@@ -3,7 +3,6 @@ package org.djw.app.restletresources;
 
 import openfda.classes.DailyMedClient;
 import openfda.classes.OpenFDAClient;
-import openfda.classes.PillBoxClient;
 import openfda.classes.ServerAuth;
 
 import org.apache.log4j.Logger;
@@ -74,13 +73,7 @@ public class DrugInfoResource extends ServerResource {
 					}
 				}
 				
-				
-				ServiceURI = "/pillboxAPIService.php?key=CGCUZFWCM4&ingredient=aspirin&has_image=1";
-				PillBoxClient pillClient = new PillBoxClient();
-				String jsonPill = pillClient.getService(ServiceURI);
-logger.debug(jsonPill);
-				
-				
+								
 				Message = "";
 				Status = 0;
 				DrugInfo.put("images", images);
