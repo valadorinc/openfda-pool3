@@ -56,9 +56,9 @@ app.controller("reactionController", function($scope, $http) {
 			    	    	item[0] = item[0].replace("<a ", "<a class='reaction-link'");
 			    	    	var link = "<a href='javascript:void(0)' ";*/
 			    	    	
-			    	    	item[0] = "BEVACIZUMAB";
+			    	    	//item[0] = "BEVACIZUMAB";
 			    	    	
-			    	    	var link = "<div id='myDiv' onClick='drugLabelsDisplay(\"" + item[0] + "\")'>" + "testname" + "</div>";
+			    	    	var link = "<div id='myDiv' onClick='drugLabelsDisplay(\"" + item[0] + "\")'><span>" + item[0] + "</span></div>";
 			    	    	
 			    	    	$('#reaction_table').append('<tr><td>' + link + '</td><td>' + item[1] +  '</td></tr>');
 			    	    });
@@ -85,8 +85,20 @@ function drugLabelsDisplay(drugName) {
   	    	/*$thead = $('<thead>').append($('<tr>').append($('<th>').text(response.cols[0]),$('<th>').text(response.cols[1])));
   	        $('#drug_table').append($thead);*/
 	    		
-	    	    $.each(response.images, function(i, item) {
-	    	    		    	    	
+	    	    $.each(response.DrugInfo, function(i, item) {
+	    	    	if (i != 'images'){
+	    	    		i = i.replace(/([_])/, " ");
+	    	    		item = item.replace(/([\[\]'"])/g, "");
+	    	    		if(item != ""){
+	    	    			$('#drug-info').append('<p>' + i + ': ' + item + '</p>');
+	    	    		}
+	    	    		else {
+	    	    			$('#drug-info').append('<p>' + i + ':  N/A!</p>');
+	    	    		}
+	    	    	} 	
+	    	    });
+	    	    
+	    	    $.each(response.DrugInfo.images, function(i, item) {
 	    	    	$('#drug-info').append('<img src="' + item + '" class="img-rounded" alt="Cinque Terre" width="304" height="236">');	    	    	
 	    	    });
 	    	});
@@ -95,3 +107,24 @@ function drugLabelsDisplay(drugName) {
   	  //alert('error');
     });
 }
+
+
+app.controller("resetController", function($scope) {
+	$scope.reset = function () {
+		//$('#reactionKeyword input').html('');
+		//$('#drugKeyword input').html('');
+		//$('#drug_table div').html('');
+		//var myEl = angular.element( document.querySelector('.thread'));
+		//myEl = angular.element( document.querySelector('#reaction_table_div'));
+		//document.getElementById('reaction_table_div').innerHTML = "";
+		/*
+		var div = document.getElementById('reaction_table_div');
+		while(div.firstChild){
+		    div.removeChild(div.firstChild);
+		}
+		*/
+		//myEl.remove();
+		window.location.href = 'index.php';
+	};
+	
+});
