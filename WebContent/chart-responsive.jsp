@@ -9,6 +9,7 @@ String Thing1 = "abdominal pain";
 String Thing2 = "";
 String ThingType = "reactions";
 
+String ThingList = "";
 
 if (request.getParameter("Thing1") !=null) {
 	Thing1 = request.getParameter("Thing1");
@@ -17,14 +18,17 @@ if (request.getParameter("Thing1") !=null) {
 }
 if (request.getParameter("Thing2") !=null) {
 	Thing2 = request.getParameter("Thing2");
+	ThingList = Thing1 + "~" + Thing2;
 } else {
 	Thing2 = "";
+	ThingList = Thing1;
 }
 if (request.getParameter("ThingType") !=null) {
 	ThingType = request.getParameter("ThingType");
 } else {
 	ThingType = "drugs";
 }
+
 
 
 
@@ -78,7 +82,7 @@ String Message = "";
   		var jsonData = <%=sResponse%>;
         var data = google.visualization.arrayToDataTable(jsonData);
         var options = {
-          title: 'Adverse Reactions',
+          title: 'Adverse Reactions by Age',
           width: "100%"
         };
 
