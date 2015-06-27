@@ -21,6 +21,14 @@
     <script src="js/RetrieveData.js"></script>
     <script src="js/autocomplete-deluxe.js"></script>
     <script src="js/autocomplete.js"></script>
+   <!-- google chart -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <!-- google chart end -->
+    
+    <!-- bootstrap gallery -->
+    <script src="js/photo-gallery.js"></script>
+    <!-- bootstrap gallery end -->
+   
    
 </head>
 <!-- <body ng-app="mainModule"> -->
@@ -59,8 +67,16 @@
 				    <input placeholder="Drug Name" class="autocomplete-form form-control form-text jquery-once-2-processed ui-autocomplete-input autocomplete-multiple ui-autocomplete-loading" id="autocomplete-input-drug" style="width: 85px;" type="text" name="drug" value="" size="60" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
 		        </div>
 		    </div>              
-            
-            <div class="text-center add-field"><a href="#">+</a></div>
+            <div id="drug_stat_div"></div>
+			<div id="btnDiv" ng-controller="btnController" class="ng-scope">
+	        </br>       	
+	        	<div id="statBtn">
+	        		<button id="statBtn" ng-click="displayDrugStat()">Statistic</button>
+	        	</div>	
+	        	<div id="resetBtn">
+            		<button id="resetBtn" ng-click="reset()">Reset</button>
+            	</div>
+            </div>  
           
 	        <div id="drug_table_div" class="table-responsive table-bordered table-stripped">          
 	            <table class="table" id="drug_table"></table>
@@ -78,14 +94,23 @@
 			        <input placeholder="Adverse Reaction" class="autocomplete-form form-control form-text jquery-once-2-processed ui-autocomplete-input autocomplete-multiple ui-autocomplete-loading" id="autocomplete-input-reaction" style="width: 125px;" type="text" name="reaction" value="" size="60" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
 			    </div>
 	        </div>              
-        
-            <div class="text-center add-field"><a href="#">+</a></div>
+       
 
 	        <div id="reaction_table_div" class="table-responsive table-bordered table-stripped">          
 	            <table class="table" id="reaction_table"></table>
 	        </div>
             
-            <div id="drug-info"></div>
+            <div id="drug-info" class="container"></div>
+			<div id="reaction_stat_div"></div>
+			<div id="btnDiv" ng-controller="btnController" class="ng-scope">	
+            </br>        	
+	        	<div id="statBtn">
+	        		<button id="statBtn" ng-click="displayReactionStat()">Statistic</button>
+	        	</div>	
+	        	<div id="resetBtn">
+            		<button id="resetBtn" ng-click="reset()">Reset</button>
+            	</div>
+            </div>
             
           </form>
 
