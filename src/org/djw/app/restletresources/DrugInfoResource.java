@@ -45,7 +45,6 @@ public class DrugInfoResource extends ServerResource {
 				if (results.length() > 0){
 					JSONObject drug = results.getJSONObject(0);
 					JSONObject openfda = drug.getJSONObject("openfda");
-//logger.debug(openfda.toString(1));
 					
 					spl_set_id = openfda.getJSONArray("spl_set_id").getString(0);
 					DrugInfo.put("brand_name", openfda.getString("brand_name"));

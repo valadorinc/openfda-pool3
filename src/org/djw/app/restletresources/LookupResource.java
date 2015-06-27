@@ -40,7 +40,7 @@ public class LookupResource extends ServerResource {
 			String dbType = "";
 			String sqlStatement = "";
 			
-			Partial = Partial.replace("%20"," ");
+			Partial = Partial.replace("%20"," "); //unencode space character
 			if (LookupType.equals("reactions")){
 				sqlStatement = "select reaction from reactions ";
 				if (!Partial.equals("")){
@@ -65,7 +65,6 @@ public class LookupResource extends ServerResource {
 			OutputFormatter formatter = new OutputFormatter();
 			JSONArray jResults = formatter.getJsonArray(dbTable);
 			
-			
 			Message = "";
 			Status = 0;
 			jBody.put("results", jResults);
@@ -81,7 +80,5 @@ public class LookupResource extends ServerResource {
 		rep = new JsonRepresentation(jResponse.getResponse(jResponse));
 		return rep;
 	}
-	
-
 }
 

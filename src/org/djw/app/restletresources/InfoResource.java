@@ -66,9 +66,6 @@ public class InfoResource extends ServerResource {
 			br = new BufferedReader(new FileReader(VersionFile));
  
 			while ((sCurrentLine = br.readLine()) != null) {
-//				if (logger.isDebugEnabled()){
-//					logger.debug("Version: " + sCurrentLine);
-//				}
 				version = sCurrentLine;
 			}
  
