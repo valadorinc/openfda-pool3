@@ -25,62 +25,51 @@ public class OpenFDAResource extends ServerResource {
 		try {
 
 			String ServerKey = "";
-			if (getRequest().getAttributes().get("ServerKey") != null)
-				ServerKey = (String) getRequest().getAttributes().get(
-						"ServerKey");
+			if (getRequest().getAttributes().get("ServerKey") != null) ServerKey = (String) getRequest().getAttributes().get("ServerKey");
 			ServerAuth serverAuth = new ServerAuth();
 			boolean Authenticated = serverAuth.authenticate(ServerKey);
 
 			if (Authenticated) {
 				String ReactionList = "";
-				if (getRequest().getAttributes().get("reactionlist") != null)
-					ReactionList = (String) getRequest().getAttributes().get(
-							"reactionlist");
-ReactionList = ReactionList.replace("%7E","~");
-
+				if (getRequest().getAttributes().get("reactionlist") != null) ReactionList = (String) getRequest().getAttributes().get("reactionlist");
+				ReactionList = ReactionList.replace("%7E","~");  //unencode tilda character
 				String[] reactions = ReactionList.split("~");
 				String Reaction = "";
 				for (int r = 0; r < reactions.length; r++) {
-					Reaction += "patient.reaction.reactionmeddrapt:\""
-							+ reactions[r] + "\"";
+					Reaction += "patient.reaction.reactionmeddrapt:\"" + reactions[r] + "\"";
 					if (r < reactions.length - 1) {
 						Reaction += "+AND+";
 					}
 				}
 
-				String ServiceURI = "/event.json?search=" + Reaction
-						+ "&count=patient.drug.openfda.substance_name.exact";
+				String ServiceURI = "/event.json?search=" + Reaction + "&count=patient.drug.openfda.substance_name.exact";
 				if (logger.isDebugEnabled()){
 					logger.debug("ServiceURI: " + ServiceURI);
 				}
 
-
-				if (logger.isDebugEnabled()){
-					logger.debug("ServiceURI: " + ServiceURI);
-				}
-
+				JSONArray cols = new JSONArray();
+				JSONArray rows = new JSONArray();
 				OpenFDAClient restClient = new OpenFDAClient();
 				JSONObject json = restClient.getService(ServiceURI);
-				JSONArray results = json.getJSONArray("results");
-				JSONArray cols = new JSONArray();
-				cols.put("Drug Name");
-				cols.put("Occurrences");
-				JSONArray rows = new JSONArray();
-				for (int i = 0; i < results.length(); i++) {
-					JSONArray row = new JSONArray();
-					JSONObject result = results.getJSONObject(i);
-					String Drug = result.getString("term");
-					int Occurrences = result.getInt("count");
-					row.put(Drug);
-					row.put(Occurrences);
-					rows.put(row);
+				if (!json.isNull("results")){
+					JSONArray results = json.getJSONArray("results");
+					cols.put("Drug Name");
+					cols.put("Occurrences");
+					for (int i = 0; i < results.length(); i++) {
+						JSONArray row = new JSONArray();
+						JSONObject result = results.getJSONObject(i);
+						String Drug = result.getString("term");
+						int Occurrences = result.getInt("count");
+						row.put(Drug);
+						row.put(Occurrences);
+						rows.put(row);
+					}
+					ReportOutput.put("cols", cols);
+					ReportOutput.put("rows", rows);
+				} else {
+					ReportOutput.put("cols", cols);
+					ReportOutput.put("rows", rows);
 				}
-
-				ReportOutput.put("cols", cols);
-				ReportOutput.put("rows", rows);
-
-				// logger.debug(metaResults.toString(1));
-
 			} else {
 				Status = 1;
 				Message = "invalid authentication token";
@@ -91,7 +80,6 @@ ReactionList = ReactionList.replace("%7E","~");
 		}
 
 		jBody.put("ReportOutput", ReportOutput);
-
 		ResponseJson jResponse = new ResponseJson();
 		Representation rep = null;
 		jResponse.setStatusCode(Status);

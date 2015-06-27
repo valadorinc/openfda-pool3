@@ -1,5 +1,6 @@
 package org.djw.app.restletresources;
 
+import org.apache.log4j.Logger;
 import org.djw.tools.json.ErrorJson;
 import org.djw.tools.json.ResponseJson;
 import org.json.JSONException;
@@ -14,6 +15,7 @@ import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 public class TestResource extends ServerResource {
+	final static Logger logger = Logger.getLogger(TestResource.class);
 	@Get
 	public Representation represent() throws JSONException {
 		Representation rep = null;
@@ -64,7 +66,7 @@ public class TestResource extends ServerResource {
 			rep = new JsonRepresentation(jResponse);
 			getResponse().setStatus(Status.SUCCESS_OK);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.fatal(e);
 			JSONStringer jsReply = new JSONStringer();
 			try {
 				jsReply.object();

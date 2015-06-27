@@ -38,7 +38,7 @@ public class FDADrugResource extends ServerResource {
 				String DrugList = "";
 				if (getRequest().getAttributes().get("druglist") != null ) DrugList = (String) getRequest().getAttributes().get("druglist");
 				
-DrugList = DrugList.replace("%7E","~");
+				DrugList = DrugList.replace("%7E","~"); //unencode tilda character
 				String[] drugs = DrugList.split("~");
 				String Drug = "";
 				for (int r=0; r<drugs.length; r++){
@@ -54,28 +54,27 @@ DrugList = DrugList.replace("%7E","~");
 					logger.debug("ServiceURI: " + ServiceURI);
 				}
 	
-				if (logger.isDebugEnabled()){
-					logger.debug("ServiceURI: " + ServiceURI);
-				}
-
 				OpenFDAClient restClient = new OpenFDAClient();
 				JSONObject json = restClient.getService(ServiceURI);
-				JSONArray results = json.getJSONArray("results");
-	
-				cols.put("Reaction");
-				cols.put("Occurrences");
-				for (int p=0; p<results.length(); p++){
-					JSONArray row = new JSONArray();
-					JSONObject rec = results.getJSONObject(p);
-					String rName = rec.getString("term");
-					int rCount = rec.getInt("count");
-					row.put(rName);
-					row.put(rCount);
-					rows.put(row);
+				if (!json.isNull("results")){
+					JSONArray results = json.getJSONArray("results");
+					cols.put("Reaction");
+					cols.put("Occurrences");
+					for (int p=0; p<results.length(); p++){
+						JSONArray row = new JSONArray();
+						JSONObject rec = results.getJSONObject(p);
+						String rName = rec.getString("term");
+						int rCount = rec.getInt("count");
+						row.put(rName);
+						row.put(rCount);
+						rows.put(row);
+					}
+					ReportOutput.put("cols", cols);
+					ReportOutput.put("rows", rows);
+				} else {
+					ReportOutput.put("cols", cols);
+					ReportOutput.put("rows", rows);
 				}
-				ReportOutput.put("cols", cols);
-				ReportOutput.put("rows", rows);
-				
 	
 	//logger.debug(json.toString(1));	
 				
