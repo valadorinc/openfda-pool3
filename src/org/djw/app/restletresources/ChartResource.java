@@ -2,8 +2,6 @@ package org.djw.app.restletresources;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 import openfda.classes.OpenFDAClient;
 import openfda.classes.ServerAuth;
@@ -35,7 +33,6 @@ public class ChartResource extends ServerResource {
 			if (getRequest().getAttributes().get("ResultType") != null ) ResultType = (String) getRequest().getAttributes().get("ResultType");
 			String ThingList = "";
 			if (getRequest().getAttributes().get("ThingList") != null ) ThingList = (String) getRequest().getAttributes().get("ThingList");
-			
 			
 			String Things = "";
 			if (!ResultType.equals("")){
@@ -96,9 +93,6 @@ public class ChartResource extends ServerResource {
 					newOrder.add(Terms.get(i));
 				}
 				Collections.sort(newOrder);
-				logger.debug("Terms: " + Terms.toString());
-				logger.debug("Counts: " + Counts.toString());
-				logger.debug("newOrder: " + newOrder.toString());
 				for (int i=0; i<newOrder.size(); i++){
 					int idx = Terms.indexOf(newOrder.get(i));
 					JSONArray jRec = new JSONArray();
@@ -107,32 +101,6 @@ public class ChartResource extends ServerResource {
 					chartdata.put(jRec);
 				}
 
-//				JSONArray jSort = new JSONArray();
-//				for (int i=0; i<results.length(); i++){
-//					JSONObject cd = results.getJSONObject(i);
-//					String term = cd.getString("term");
-//					String count = cd.getString("count");
-//					JSONObject jRec = new JSONObject();
-//					jRec.put("Term",term);
-//					jRec.put("Count",count);
-//					jSort.put(jRec);
-//				}
-//
-//				JSONArray sortedArray = this.sortData(jSort);
-//logger.debug(jSort.toString(1));
-//logger.debug(sortedArray.toString(1));
-				
-//				
-//				for (int i=0; i<results.length(); i++){
-//					JSONObject cd = results.getJSONObject(i);
-//					String time = cd.getString("term");
-//					int count = cd.getInt("count");
-//					JSONArray jRec = new JSONArray();
-//					jRec.put(time);
-//					jRec.put(count);
-//					chartdata.put(jRec);
-//				}
-				
 				jBody.put("chartdata", chartdata);
 			} catch (Exception e){
 				logger.fatal("an error has occurred: " + e);
@@ -149,50 +117,5 @@ public class ChartResource extends ServerResource {
 		jResponse.setBody(jBody);
 		rep = new JsonRepresentation(jResponse.getResponse(jResponse));
 		return rep;
-	}
-	
-	private JSONArray sortData(JSONArray jArray){
-		JSONArray sortedArray = new JSONArray();
-		
-		try{
-		    String jsonArrStr = jArray.toString();
-	
-		    JSONArray jsonArr = new JSONArray(jsonArrStr);
-		    JSONArray sortedJsonArray = new JSONArray();
-	
-		    List<JSONObject> jsonValues = new ArrayList<JSONObject>();
-		    for (int i = 0; i < jsonArr.length(); i++) {
-		        jsonValues.add(jsonArr.getJSONObject(i));
-		    }
-		    Collections.sort( jsonValues, new Comparator<JSONObject>() {
-		        //You can change "Name" with "ID" if you want to sort by ID
-		        private static final String KEY_NAME = "Term";
-	
-		        @Override
-		        public int compare(JSONObject a, JSONObject b) {
-		            String valA = new String();
-		            String valB = new String();
-	
-		            try {
-		                valA = (String) a.get(KEY_NAME);
-		                valB = (String) b.get(KEY_NAME);
-		            } 
-		            catch (JSONException e) {
-		                //do something
-		            }
-	
-		            return valA.compareTo(valB);
-		            //if you want to change the sort order, simply use the following:
-		            //return -valA.compareTo(valB);
-		        }
-		    });
-	
-		    for (int i = 0; i < jsonArr.length(); i++) {
-		        sortedJsonArray.put(jsonValues.get(i));
-		    }
-		} catch (Exception e){
-			logger.fatal("an error occurred: " + e);
-		}
-		return sortedArray;
 	}
 }

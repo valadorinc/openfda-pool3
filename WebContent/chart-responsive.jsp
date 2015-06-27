@@ -9,7 +9,7 @@ String Thing1 = "abdominal pain";
 String Thing2 = "";
 String ThingType = "reactions";
 
-String ThingList = "";
+String ThingList = "0";
 
 if (request.getParameter("Thing1") !=null) {
 	Thing1 = request.getParameter("Thing1");
@@ -18,7 +18,7 @@ if (request.getParameter("Thing1") !=null) {
 }
 if (request.getParameter("Thing2") !=null) {
 	Thing2 = request.getParameter("Thing2");
-	ThingList = Thing1 + "~" + Thing2;
+	
 } else {
 	Thing2 = "";
 	ThingList = Thing1;
@@ -29,7 +29,10 @@ if (request.getParameter("ThingType") !=null) {
 	ThingType = "drugs";
 }
 
-
+ThingList = Thing1;
+if (!Thing2.equals("0")){
+	ThingList = Thing1 + "~" + Thing2;
+}
 
 
 /* String Reaction = "";
@@ -53,7 +56,7 @@ String Message = "";
 		//String ServiceURI = "/fda/" + ServerKey + "/chart/reactions/\"abdominal pain\"~death";
 		//String ServiceURI = "/fda/" + ServerKey + "/chart/drugs/PREDNISONE";
 		
-		String ServiceURI = "/fda/" + ServerKey + "/chart/" + ThingType + "/" + Thing1;
+		String ServiceURI = "/fda/" + ServerKey + "/chart/" + ThingType + "/" + ThingList;
 	
 		RestClient restClient = new RestClient();
 		JSONObject jResponse = restClient.getService(ServiceURI);
