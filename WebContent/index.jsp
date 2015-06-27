@@ -10,6 +10,7 @@
 <h1>OpenFDA</h1>
 <a href="drugsearch.jsp">Drug Interactions</a><br>
 <a href="reactionsearch.jsp">Adverse Reactions</a><br>
+<a href="chart-responsive.jsp">Chart</a><br>
 <p>
 	<a href="util">utilities</a>
 </p>
