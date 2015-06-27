@@ -47,24 +47,29 @@ public class OpenFDAResource extends ServerResource {
 					logger.debug("ServiceURI: " + ServiceURI);
 				}
 
+				JSONArray cols = new JSONArray();
+				JSONArray rows = new JSONArray();
 				OpenFDAClient restClient = new OpenFDAClient();
 				JSONObject json = restClient.getService(ServiceURI);
-				JSONArray results = json.getJSONArray("results");
-				JSONArray cols = new JSONArray();
-				cols.put("Drug Name");
-				cols.put("Occurrences");
-				JSONArray rows = new JSONArray();
-				for (int i = 0; i < results.length(); i++) {
-					JSONArray row = new JSONArray();
-					JSONObject result = results.getJSONObject(i);
-					String Drug = result.getString("term");
-					int Occurrences = result.getInt("count");
-					row.put(Drug);
-					row.put(Occurrences);
-					rows.put(row);
+				if (!json.isNull("results")){
+					JSONArray results = json.getJSONArray("results");
+					cols.put("Drug Name");
+					cols.put("Occurrences");
+					for (int i = 0; i < results.length(); i++) {
+						JSONArray row = new JSONArray();
+						JSONObject result = results.getJSONObject(i);
+						String Drug = result.getString("term");
+						int Occurrences = result.getInt("count");
+						row.put(Drug);
+						row.put(Occurrences);
+						rows.put(row);
+					}
+					ReportOutput.put("cols", cols);
+					ReportOutput.put("rows", rows);
+				} else {
+					ReportOutput.put("cols", cols);
+					ReportOutput.put("rows", rows);
 				}
-				ReportOutput.put("cols", cols);
-				ReportOutput.put("rows", rows);
 			} else {
 				Status = 1;
 				Message = "invalid authentication token";
