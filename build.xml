@@ -8,9 +8,10 @@ ant -Dwebapp.env=dev  - development
  
 compile was remove install remove phpprod
 -->
-<project name="AppBuilder" default="war" basedir="..">
+<project name="AppBuilder" default="war" basedir=".">
 
-	<property file="AntBuild/build.properties"/>
+	<taskdef resource="net/sf/antcontrib/antlib.xml" />
+	<property file="build.properties"/>
 	
 	<path id="classpath">
  		<fileset dir="${lib.dir}" includes="servlet-api.jar"/>
@@ -64,6 +65,17 @@ compile was remove install remove phpprod
 		  <move file="${build.dir}/WEB-INF/classes/log4j.properties.${webapp.env}" tofile="${build.dir}/WEB-INF/classes/log4j.properties"/>
 		<move file="${build.dir}/META-INF/context.xml.${webapp.env}" tofile="${build.dir}/META-INF/context.xml"/>
 
+	<if>
+            <available file="${prod.php.home}" type="dir" />
+            <then>
+		<delete includeemptydirs="true">
+		    <fileset dir="${prod.php.home}" includes="**" />
+		</delete>
+            </then>
+        </if>
+		<copy todir="${prod.php.home}">
+			<fileset dir="${root.dir}/${prod.php.filedir}"/>
+		</copy>
 	</target>
 
 	<target name="war" depends="copy">
@@ -94,7 +106,7 @@ compile was remove install remove phpprod
           username="${manager.username}"
           password="${manager.password}"
           path="/${webapp.name}"
-          war="../${dist.dir}/${webapp.name}.war"/> 
+          war="${dist.dir}/${webapp.name}.war"/> 
     </target>
     
     <target name="remove">
