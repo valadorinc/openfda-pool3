@@ -8,6 +8,11 @@ import org.restlet.routing.Router;
  * 
  * @author dwhite
  *
+ * Maps all service urls to classes which handle the services. 
+ * lookup - pulls data from the lookup tables used for autocomplete.
+ * search - performs a search of the open.fda.gov service with given parameters.
+ * druginfo - returns additional information on drugs from DailyMed RESTful service.
+ * chart - returns data used to chart adverse reactions.
  */
 public class RestfulServices extends Application {
 	@Override

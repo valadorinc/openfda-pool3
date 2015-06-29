@@ -16,7 +16,15 @@ import org.restlet.resource.ServerResource;
 
 public class FDADrugResource extends ServerResource {
 	final static Logger logger = Logger.getLogger(FDADrugResource.class);
-	
+
+	/**
+	 * Pulls result adverse reaction data from open.fda.gov based on a search of one or more drugs.  
+	 * @param String ServerKey Used to authenticate the server requesting data
+	 * @param String druglist List of drugs to search for
+	 * @return JSONObject
+	 * @throws JSONException
+	 * 		
+	 */
 	@Get
 	public Representation represent() throws JSONException {
 

@@ -19,7 +19,7 @@ public class OpenFDAClient {
 	final static Logger logger = Logger.getLogger(OpenFDAClient.class);
 
 	/**
-	 * RestClient is used to consume restful services.
+	 * RestClient is used to consume restful services. This particular client pulls from open.fda.gov.
 	 */
 	public OpenFDAClient(){}
 	

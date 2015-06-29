@@ -18,6 +18,14 @@ import org.restlet.resource.ServerResource;
 public class DrugInfoResource extends ServerResource {
 	final static Logger logger = Logger.getLogger(DrugInfoResource.class);
 	
+	/**
+	 * Pulls information on drugs from open.fda.gov and enhances the result with additional data from DailyMed.  
+	 * @param String ServerKey Used to authenticate the server requesting data
+	 * @param String DrugName Name of drug needing information
+	 * @return JSONObject
+	 * @throws JSONException
+	 * 		
+	 */
 	@Get
 	public Representation represent() throws JSONException {
 

@@ -18,6 +18,12 @@ import org.restlet.resource.ServerResource;
 public class InfoResource extends ServerResource {
 	final static Logger logger = Logger.getLogger(InfoResource.class);
 	
+	/**
+	 * Returns version information about the application service and libraries  
+	 * @return JSONObject
+	 * @throws JSONException
+	 * 		
+	 */
 	@Get
 	public Representation represent() throws JSONException {
 		String ServiceURL = "";
@@ -55,6 +61,12 @@ public class InfoResource extends ServerResource {
 		return rep;
 	}
 	
+	/**
+	 * Returns application version. Version is stored in a config file which is incremented through CI  
+	 * @param String VersionFile File containing current version number
+	 * @return String
+	 * 		
+	 */
 	private String getVersion(String VersionFile){
 		String version = "";
 		BufferedReader br = null;
