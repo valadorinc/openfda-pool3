@@ -33,48 +33,60 @@ $( document ).ready(function() {
 	
 	$( "#autocomplete-input-drug" ).click(function(e) {
 		//update( $( "span:first" ) );
-		var code = event.keyCode || event.which;
 		
-		if(code == "13" || code == "9") {
-			e.preventDefault();
-		    var keywordArr = new Array();  
-		    
-		    $('#drug-input-control').children('.autocomplete-item').each(function () {
-		    	var value = this.textContent || this.innerText || getText( this );		    	
-		    	keywordArr.push(value);
-		    });
-		    
-		    keyword = keywordArr.join("~");
-		    
-		    $.get('data/OpenFdaDataRetrieval.php', {keyword:keyword, type:'drug'}).
-		      success(function(response) {
-			    	response = JSON.parse(response);
-			    	
-			    	$(function() {
-			    		$('#drug_table_div').show();
-			    		
-		    	    	$thead = $('<thead>').append($('<tr>').append($('<th>').text(response.cols[0]),$('<th>').text(response.cols[1])));
-		    	        $('#drug_table').append($thead);
-			    		
-			    	    $.each(response.rows, function(i, item) {
-			    	    	$tr = $('<tr class="success">').append($('<td>').text(item[0]),$('<td>').text(item[1]));
-			    	        $('#drug_table').append($tr);
-			    	    });
-			    	});
-		      }).
-		      error(function(error) {
-		    	  //alert('error');
-		      });
+		/*if ( e.type == "click" ) {
+	        alert("came from a click event!");
+		}*/
+		
+		if(e.originalEvent == undefined) {
+			//alert("came from a autocomplete click event!");
+				
+			var code = event.keyCode || event.which;
+			
+			//if(code == "13" || code == "9") {
+				e.preventDefault();
+			    var keywordArr = new Array();  
+			    
+			    $('#drug-input-control').children('.autocomplete-item').each(function () {
+			    	var value = this.textContent || this.innerText || getText( this );		    	
+			    	keywordArr.push(value);
+			    });
+			    
+			    keyword = keywordArr.join("~");
+			    
+			    $.get('data/OpenFdaDataRetrieval.php', {keyword:keyword, type:'drug'}).
+			      success(function(response) {
+				    	response = JSON.parse(response);
+				    	
+				    	$(function() {
+				    		$('#drug_table_div').show();
+				    		
+			    	    	$thead = $('<thead>').append($('<tr>').append($('<th>').text(response.cols[0]),$('<th>').text(response.cols[1])));
+			    	        $('#drug_table').append($thead);
+				    		
+				    	    $.each(response.rows, function(i, item) {
+				    	    	$tr = $('<tr class="success">').append($('<td>').text(item[0]),$('<td>').text(item[1]));
+				    	        $('#drug_table').append($tr);
+				    	    });
+				    	});
+			      }).
+			      error(function(error) {
+			    	  //alert('error');
+			      });
+			//}
 		}
 	});
 	
 	$('#reaction_table_div').hide();
 	
 	$( "#autocomplete-input-reaction" ).click(function(e) {
-		//update( $( "span:first" ) );
-		var code = event.keyCode || event.which;
 		
-		if(code == "13" || code == "9") {
+		
+		if(e.originalEvent == undefined) {
+		
+			var code = event.keyCode || event.which;
+		
+		//if(code == "13" || code == "9") {
 			e.preventDefault();
 		    var keywordArr = new Array();  
 		    
@@ -106,6 +118,7 @@ $( document ).ready(function() {
 		      error(function(error) {
 		    	  //alert('error');
 		      });
+		//}
 		}
 	});
 	
