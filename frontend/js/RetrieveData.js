@@ -18,7 +18,99 @@ $( document ).ready(function() {
 });
 */
 
-
+$( document ).ready(function() {
+	
+	$( "button:first" ).click(function() {
+		  update( $( "span:first" ) );
+	});
+	
+	function update( j ) {
+	    var n = parseInt( j.text(), 10 );
+		j.text( n + 1 );
+	}
+	
+	$('#drug_table_div').hide();
+	
+	$( "#autocomplete-input-drug" ).click(function(e) {
+		//update( $( "span:first" ) );
+		var code = event.keyCode || event.which;
+		
+		if(code == "13" || code == "9") {
+			e.preventDefault();
+		    var keywordArr = new Array();  
+		    
+		    $('#drug-input-control').children('.autocomplete-item').each(function () {
+		    	var value = this.textContent || this.innerText || getText( this );		    	
+		    	keywordArr.push(value);
+		    });
+		    
+		    keyword = keywordArr.join("~");
+		    
+		    $.get('data/OpenFdaDataRetrieval.php', {keyword:keyword, type:'drug'}).
+		      success(function(response) {
+			    	response = JSON.parse(response);
+			    	
+			    	$(function() {
+			    		$('#drug_table_div').show();
+			    		
+		    	    	$thead = $('<thead>').append($('<tr>').append($('<th>').text(response.cols[0]),$('<th>').text(response.cols[1])));
+		    	        $('#drug_table').append($thead);
+			    		
+			    	    $.each(response.rows, function(i, item) {
+			    	    	$tr = $('<tr class="success">').append($('<td>').text(item[0]),$('<td>').text(item[1]));
+			    	        $('#drug_table').append($tr);
+			    	    });
+			    	});
+		      }).
+		      error(function(error) {
+		    	  //alert('error');
+		      });
+		}
+	});
+	
+	$('#reaction_table_div').hide();
+	
+	$( "#autocomplete-input-reaction" ).click(function(e) {
+		//update( $( "span:first" ) );
+		var code = event.keyCode || event.which;
+		
+		if(code == "13" || code == "9") {
+			e.preventDefault();
+		    var keywordArr = new Array();  
+		    
+		    $('#reaction-input-control').children('.autocomplete-item').each(function () {
+		    	var value = this.textContent || this.innerText || getText( this );		    	
+		    	keywordArr.push(value);
+		    });
+		    
+		    keyword = keywordArr.join("~");
+		    
+		    $.get('data/OpenFdaDataRetrieval.php', {keyword:keyword, type:'reaction'}).
+		      success(function(response) {
+			    	response = JSON.parse(response);
+			    	
+			    	$(function() {
+			    		$('#reaction_table_div').show();
+			    		
+		    	    	$thead = $('<thead>').append($('<tr>').append($('<th>').text(response.cols[0]),$('<th>').text(response.cols[1])));
+		    	        $('#reaction_table').append($thead);
+			    	    
+			    	    $.each(response.rows, function(i, item) {			    	    	
+			    	    	item[0] = item[0].replace(/(['"])/g, "\\$1");
+			    	    	var link = "<div id='myDiv' onClick='drugLabelsDisplay(\"" + item[0] + "\")'><span>" + item[0] + "</span></div>";
+			    	    	$('#reaction_table').append('<tr><td>' + link + '</td><td>' + item[1] +  '</td></tr>');
+			    	    });
+			    	    
+			    	});
+		      }).
+		      error(function(error) {
+		    	  //alert('error');
+		      });
+		}
+	});
+	
+});
+    
 var app = angular.module("mainModule", []);
 
 app.controller("drugController", function($scope, $http) {
@@ -27,7 +119,7 @@ app.controller("drugController", function($scope, $http) {
 	  $('#drug_table_div').hide();
 	
 	  $scope.onDrugSearch = function () {
-
+		  
 		    var keywordArr = new Array();  
 		  
 		    $('#drug-input-control').children('.autocomplete-item').each(function () {
@@ -46,7 +138,7 @@ app.controller("drugController", function($scope, $http) {
 			    		
 		    	    	$thead = $('<thead>').append($('<tr>').append($('<th>').text(response.cols[0]),$('<th>').text(response.cols[1])));
 		    	        $('#drug_table').append($thead);
-			    		
+			    				    	        
 			    	    $.each(response.rows, function(i, item) {
 			    	    	$tr = $('<tr class="success">').append($('<td>').text(item[0]),$('<td>').text(item[1]));
 			    	        $('#drug_table').append($tr);
@@ -83,18 +175,9 @@ app.controller("reactionController", function($scope, $http) {
 		    	    	$thead = $('<thead>').append($('<tr>').append($('<th>').text(response.cols[0]),$('<th>').text(response.cols[1])));
 		    	        $('#reaction_table').append($thead);
 			    		
-			    	    $.each(response.rows, function(i, item) {
-			    	    	
+			    	    $.each(response.rows, function(i, item) {			    	    	
 			    	    	item[0] = item[0].replace(/(['"])/g, "\\$1");
-			    	    	
-			    	    	/*var str = "Visit Microsoft!";
-			    	    	item[0] = item[0].replace("<a ", "<a class='reaction-link'");
-			    	    	var link = "<a href='javascript:void(0)' ";*/
-			    	    	
-			    	    	//item[0] = "BEVACIZUMAB";
-			    	    	
 			    	    	var link = "<div id='myDiv' onClick='drugLabelsDisplay(\"" + item[0] + "\")'><span>" + item[0] + "</span></div>";
-			    	    	
 			    	    	$('#reaction_table').append('<tr><td>' + link + '</td><td>' + item[1] +  '</td></tr>');
 			    	    });
 			    	});
