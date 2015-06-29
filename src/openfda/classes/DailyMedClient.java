@@ -10,16 +10,12 @@ import org.apache.log4j.Logger;
 import org.djw.tools.utils.GeneralUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-/**
- * 
- * @author dwhite
- *
- */
+
 public class DailyMedClient {
 	final static Logger logger = Logger.getLogger(DailyMedClient.class);
 
 	/**
-	 * RestClient is used to consume restful services.
+	 * RestClient is used to consume restful services. This particular class is setup to pull from DailyMed service.
 	 */
 	public DailyMedClient(){}
 	

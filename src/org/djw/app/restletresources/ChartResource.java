@@ -18,6 +18,16 @@ import org.restlet.resource.ServerResource;
 
 public class ChartResource extends ServerResource {
 	final static Logger logger = Logger.getLogger(ChartResource.class);
+	/**
+	 * Pulls result data from a search and formats for display in charts.  
+	 * @param String ServerKey Used to authenticate the server requesting data
+	 * @param String ResultType The type of search being performed. drugs or reactions
+	 * @param String ThingList The list of items to search for
+	 * @return JSONObject
+	 * @throws JSONException
+
+	 * 		
+	 */
 	@Get
 	public Representation represent() throws JSONException {
 		int StatusCode = 0;

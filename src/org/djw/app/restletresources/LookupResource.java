@@ -18,6 +18,15 @@ import org.restlet.resource.ServerResource;
 public class LookupResource extends ServerResource {
 	final static Logger logger = Logger.getLogger(LookupResource.class);
 	
+	/**
+	 * Returns lookup data for use in dropdown and autocomplete application controls.   
+	 * @param String ServerKey Used to authenticate the server requesting data.
+	 * @param String lookuptype Type of lookup to be performed. drugs or adverse reactions.
+	 * @param String partial Partial string of drug or term to be looked up.
+	 * @return JSONObject
+	 * @throws JSONException
+	 * 		
+	 */
 	@Get
 	public Representation represent() throws JSONException {
 

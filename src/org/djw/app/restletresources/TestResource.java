@@ -16,6 +16,13 @@ import org.restlet.resource.ServerResource;
 
 public class TestResource extends ServerResource {
 	final static Logger logger = Logger.getLogger(TestResource.class);
+
+	/**
+	 * A simple test service used for configuration and testing of the service platform. This function handles get requests.   
+	 * @return JSONObject
+	 * @throws JSONException
+	 * 		
+	 */
 	@Get
 	public Representation represent() throws JSONException {
 		Representation rep = null;
@@ -43,6 +50,12 @@ public class TestResource extends ServerResource {
 		return rep;
 	}
 	
+	/**
+	 * A simple test service used for configuration and testing of the service platform. This function handles post requests.   
+	 * @return JSONObject
+	 * @throws JSONException
+	 * 		
+	 */
 	@Post("json:json")
 	public Representation acceptJson(JsonRepresentation represent) throws ResourceException {
 		Representation rep = null;
@@ -50,8 +63,6 @@ public class TestResource extends ServerResource {
 			JSONObject jsonobject = represent.getJsonObject();
 			String requestString = jsonobject.getString("request");
 			JSONObject json = new JSONObject(requestString);
-//			String test = json.getString("test");
-
 			getResponse().setStatus(Status.SUCCESS_ACCEPTED);
 			JSONStringer jsReply = new JSONStringer();
 			jsReply.object();

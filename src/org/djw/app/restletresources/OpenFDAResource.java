@@ -15,6 +15,14 @@ import org.restlet.resource.ServerResource;
 public class OpenFDAResource extends ServerResource {
 	final static Logger logger = Logger.getLogger(OpenFDAResource.class);
 
+	/**
+	 * Pulls result drug data from open.fda.gov based on a search of one or more adverse reactions.  
+	 * @param String ServerKey Used to authenticate the server requesting data
+	 * @param String reactionlist List of adverse reactions to search for
+	 * @return JSONObject
+	 * @throws JSONException
+	 * 		
+	 */
 	@Get
 	public Representation represent() throws JSONException {
 
