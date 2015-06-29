@@ -1,0 +1,11 @@
+server_key=JXwmbJf2+_=eG&+e
+service_url=http://localhost:8080/openfda/service
+test_lookup_partial=ibu
+test_lookup_match=IBUPROFEN
+base_url=http://localhost:8080
+json_body_indent=1
+absolute_base_path=/Users/dwhite/Documents/workspace/openfda/WebContent/
+db_descriptor=jdbc/openfda
+version_file=WEB-INF/classes/version
+openfda_service=http://api.fda.gov/drug
+dailymed_service=http://dailymed.nlm.nih.gov/dailymed
