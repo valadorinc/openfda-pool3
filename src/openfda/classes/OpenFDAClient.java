@@ -12,7 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 /**
  * 
- * @author dwhite
+ * 
  *
  */
 public class OpenFDAClient {

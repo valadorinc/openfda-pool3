@@ -6,7 +6,7 @@ import org.restlet.Restlet;
 import org.restlet.routing.Router;
 /**
  * 
- * @author dwhite
+ * 
  *
  * Maps all service urls to classes which handle the services. 
  * lookup - pulls data from the lookup tables used for autocomplete.
