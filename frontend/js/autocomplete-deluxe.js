@@ -355,13 +355,14 @@ $(document).ready(function() {
     });
   };
 
-  AppRX.MultipleWidget.Item.prototype.remove = function() {
+  AppRX.MultipleWidget.Item.prototype.remove = function(e, d) {
     this.element.remove();
-    var values = this.widget.valueForm.val();
+    $( "#" + this.widget.id ).trigger( "click" );
+    /*QQQQQvar values = this.widget.valueForm.val();
     var escapedValue = AppRX.escapeRegex( this.item.value );
     var regex = new RegExp('()*""' + escapedValue + '""|' + escapedValue + '()*', 'gi');
     this.widget.valueForm.val(values.replace(regex, ''));
-    delete this.widget.items[this.value];
+    delete this.widget.items[this.value];*/
   };
     
   AppRX.MultipleWidget.prototype.setup = function() {
@@ -424,7 +425,16 @@ $(document).ready(function() {
 
     jqObject.bind("autocompleteselect", function(event, ui) {
       self.addValue(ui.item);
-      jqObject.width(25);
+      event.preventDefault();
+      
+      $( "#" + this.id ).trigger( "click" );
+      
+      if(this.id == "autocomplete-input-drug") {
+          jqObject.width(85);
+      }
+      else {
+    	  jqObject.width(125);
+      }
       // Return false to prevent setting the last term as value for the jqObject.
       return false;
     });
@@ -456,7 +466,9 @@ $(document).ready(function() {
   	                label: value,
   	                value: value
   	            };
-  	            self.addValue(ui_item);
+  	            self.addValue(ui_item); 	            
+  	            
+  	          $( "#" + this.id ).trigger( "click" );
 
                 return false;
             }
@@ -482,10 +494,6 @@ $(document).ready(function() {
     
     var clear = false;
     
-    /*jqObject.keypress(function (event) {
-    	self.createSearchTerm(event);
-    });*/
-
     parent.keydown(function(event) {
         var code = event.keyCode || event.which;
 
