@@ -247,7 +247,12 @@ function drugLabelsDisplay(drugName) {
     	    		html += '<a class="controls next" href="'+ (arrayIndex+1) + '">next &raquo;</a>';
     	    		html += '</div>';
     	    		
-    	    		$('#myModal').dialog();
+    	    		$('#myModal').dialog({
+    	    			maxWidth:600,
+    	    	        maxHeight: 500,
+    	    	        width: 600,
+    	    	        height: 500,
+    	    		});
 
 
     	    		if($("#myModal").dialog( "isOpen" )){
