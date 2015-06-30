@@ -141,23 +141,23 @@ header h1 a {
   /* border-bottom: 1px solid rgba(53, 86, 129, 0.3); */
 }
 .gradient-drug-search {
-  background: -webkit-linear-gradient(#154898, #6c95ce);
+  background: -webkit-linear-gradient(#154898, #002244);
   /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#154898, #6c95ce);
+  background: -o-linear-gradient(#154898, #002244);
   /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#154898, #6c95ce);
+  background: -moz-linear-gradient(#154898, #002244);
   /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#154898, #6c95ce);
+  background: linear-gradient(#154898, #002244);
   /* Standard syntax */
 }
 .gradient-reaction-search {
-  background: -webkit-linear-gradient(#ff6600, #ffcb65);
+  background: -webkit-linear-gradient(#ff6600, #cc3300);
   /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#ff6600, #ffcb65);
+  background: -o-linear-gradient(#ff6600, #cc3300);
   /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#ff6600, #ffcb65);
+  background: -moz-linear-gradient(#ff6600, #cc3300);
   /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#ff6600, #ffcb65);
+  background: linear-gradient(#ff6600, #cc3300);
   /* Standard syntax */
 }
 /* borders */
@@ -194,11 +194,13 @@ header h1 a {
 #drug_table_div #drug_table {
   color: #fff;
 }
-#myDiv span {
-  Color: blue;
+.rx-table span {
+  color: #eee;
   text-decoration: underline;
   cursor: pointer;
-  cursor: hand;
+}
+.rx-table a:hover {
+  color: #000;
 }
 #btnDiv {
   padding: 0px 0px 15px 0px;
