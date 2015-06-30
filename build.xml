@@ -76,6 +76,7 @@ compile was remove install remove phpprod
 		<copy todir="${prod.php.home}">
 			<fileset dir="${root.dir}/${prod.php.filedir}"/>
 		</copy>
+		<move file="${prod.php.home}/config/constant.php.${webapp.env}" tofile="${prod.php.home}/config/constant.php"/>
 	</target>
 
 	<target name="war" depends="copy">
