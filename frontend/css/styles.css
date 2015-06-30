@@ -3,12 +3,23 @@ body {
   background: white;
   font-family: Helvetica, Arial, sans-serif;
 }
-h1 {
-  font-size: 72px !important;
+/* Header */
+header h1 {
+  margin: 0;
 }
-h1 a {
-  color: #999;
+header h1 a {
+  display: block;
+  text-indent: -133337em;
+  margin: .25em auto;
+  height: 120px;
+  background-image: url(../images/reactionrx.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-color: transparent;
+  opacity: .4;
 }
+/* Tabs */
 .selection {
   height: 98px;
   background-image: url(../images/selection.png);
@@ -30,6 +41,7 @@ h1 a {
   background-size: contain;
   background-repeat: no-repeat;*/
 }
+/* Form */
 .search-form {
   border-radius: 10px;
   padding: 20px;
