@@ -8,3 +8,4 @@ frontend/less/prepros.cfg
 frontend/less/styles-dist.css
 frontend/less/styles.css
 frontend/prepros.cfg
+frontend/chart.php

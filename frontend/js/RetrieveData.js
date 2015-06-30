@@ -213,6 +213,7 @@ function drugLabelsDisplay(drugName) {
 	    	$(function() {
 	    		$('#reaction_table_div').hide();
 	    		
+	    		
   	    	/*$thead = $('<thead>').append($('<tr>').append($('<th>').text(response.cols[0]),$('<th>').text(response.cols[1])));
   	        $('#drug_table').append($thead);*/
 	    		
@@ -228,8 +229,9 @@ function drugLabelsDisplay(drugName) {
 	    	    		}
 	    	    	} 	
 	    	    });
+	    	    //$('#drug-info').append('<div tabindex="-1" id="myModal" aria-hidden="false"></div>');
+	    	    //$('#drug-info').append('<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-body">');
 	    	    
-	    	    $('#drug-info').append('<div id="myModal"></div>');
 
 	    	    var images ="";
 
@@ -239,7 +241,7 @@ function drugLabelsDisplay(drugName) {
 	    	    	//$('#drug-info').append('<li id="bg-li"><img id="bg-img" src="' + item + '" class="img-rounded img-responsive" alt="Cinque Terre" width="100" height="100"></li>');
 	    	    });
 	    	    
-	    	    $image = $('<ul>').append($(images));
+	    	    $image = $('<ul class="row">').append($(images));
 	    	    $('#drug-info').append($image);
 	    	    
 	    	    $('li img').on('click',function(){
@@ -247,75 +249,84 @@ function drugLabelsDisplay(drugName) {
     	    		var img = '<img src="' + src + '" class="img-responsive"/>';
     	    		
     	    		//start of new code new code
-    	    		var index = $(this).parent('li').index();   
+    	    		var arrayIndex = $(this).parent('li').index();   
+    	    		
+    	    		var totalArray = $('ul.row li').length;
     	    		
     	    		var html = '';
     	    		html += img;                
     	    		html += '<div style="height:25px;clear:both;display:block;">';
-    	    		html += '<a class="controls next" href="'+ (index+2) + '">next &raquo;</a>';
-    	    		html += '<a class="controls previous" href="' + (index) + '">&laquo; prev</a>';
+    	    		html += '<a class="controls previous" href="' + (arrayIndex-1) + '">&laquo; prev</a>';
+    	    		html += '<a class="controls next" href="'+ (arrayIndex+1) + '">next &raquo;</a>';
     	    		html += '</div>';
     	    		
-    	    		//$(function() {
-    	    		    //$( "#dialog" ).dialog();
-    	    		  //});
-    	    		//$('#myModal').modal(); 
-    	    		
-    	    		$('#dialog').dialog(
-    	    			"resize", "auto"
-    	    		);
-    	    		
     	    		$('#myModal').dialog();
-    	    		
+
+
     	    		if($("#myModal").dialog( "isOpen" )){
     	    			document.getElementById("myModal").innerHTML = html;
     	    			//new code
     	    			$('a.controls').trigger('click');
     	    			
     	    		}
-    	    		/*
-    	    		$('#myModal').on('shown.bs.modal', function(){
-    	    			$('#myModal .modal-body').html(html);
-    	    			//new code
-    	    			$('a.controls').trigger('click');
-    	    		});
-    	    		$('#myModal').on('hidden.bs.modal', function(){
-    	    			$('#myModal .modal-body').html('');
-    	    		});
-    	    		*/
-    	    			
+    	    		
+    	    		if(!($("#myModal").dialog( "isOpen" ))){
+    	    			document.getElementById("myModal").innerHTML = '';
+    	    		}
+    	    		
+    	    		
+    	    		if (arrayIndex == 0) {
+    	    			$('a.previous').hide();
+    	    		}
+    	    		
+    	    		if(arrayIndex+1 == totalArray) {
+    	    			$('a.next').hide();
+    	    		} 	    			
     	       });
-   
+	    	    
+	    	    
+	    	    $(document).on('click', '.ui-icon-closethick', function(){
+	    	    	//alert("x");
+	    	    	$('#myModal .modal-body').html('');
+	    	    });
+	    	    
+	    	    
+	    	    
 	    	    $(document).on('click', 'a.controls', function(){
-	    	    	var index = $(this).attr('href');
+	    	    	
+	    	    	var indexNext = $('#myModal .next').attr('href');
+	    	    	var indexPrevious = $('#myModal .previous').attr('href');
+	    	    	
+	    	    	var index = indexNext;
 	    	    	var src = $('ul.row li:nth-child('+ index +') img').attr('src');             
 	    	    	
-	    	    	$('.modal-body img').attr('src', src);
+	    	    	$('#myModal img').attr('src', src);	    	    	
 	    	    	
-	    	    	var newPrevIndex = parseInt(index) - 1; 
-	    	    	var newNextIndex = parseInt(newPrevIndex) + 2; 
-	    	    	
-	    	    	if($(this).hasClass('previous')){               
-	    	    		$(this).attr('href', newPrevIndex); 
-	    	    		$('a.next').attr('href', newNextIndex);
-	    	    	}else{
-	    	    		$(this).attr('href', newNextIndex); 
-	    	    		$('a.previous').attr('href', newPrevIndex);
+	    	    	if($(this).hasClass('previous')){
+	    	    		
+	    	    		$(this).attr('href', index-2); 
+	    	    		$('a.next').attr('href', index);
+	    	    	}else{	
+	    	    		$(this).attr('href', index); 
+	    	    		$('a.previous').attr('href', index-2);
 	    	    	}
 	    	    	
-	    	    	var total = $('ul.row li').length + 1; 
+	    	    	
+	    	    	var total = $('ul.row li').length; 
+	    	    	
 	    	    	//hide next button
-	    	    	if(total === newNextIndex){
+	    	    	if(total <= indexNext){
 	    	    		$('a.next').hide();
 	    	    	}else{
 	    	    		$('a.next').show();
 	    	    	}            
 	    	    	//hide previous button
-	    	    	if(newPrevIndex === 0){
+	    	    	if(indexPrevious < 0){
 	    	    		$('a.previous').hide();
 	    	    	}else{
 	    	    		$('a.previous').show();
 	    	    	}
+	    	    	
 	    	    	
 	    	    	
 	    	    	return false;
@@ -438,18 +449,34 @@ app.controller("btnController", function($scope) {
 		//google.load("visualization", "1", {packages:["corechart"]});
 		//google.setOnLoadCallback(drawChart);
 		
-		var keyword = $("#reactionKeyword").val();
+		//var keyword = $("#reactionKeyword").val();
 	    
+		var keyword = "Abdominal Pain";
+		
 	    $.get('data/OpenFdaDataRetrieval.php', {keyword:keyword, type:'reactionChart'}).
 	      success(function(response) {
 		    	response = JSON.parse(response).chartdata;
 
-		    	//drawChart(response);
+		    	drawChart(response);
 		    	
 	      }).
 	      error(function(error) {
 	    	  //alert('error');
 	      });
+	    
+	    google.load("visualization", "1", {packages:["corechart"]});
+		google.setOnLoadCallback(drawChart);
+	    function drawChart(response) {
+			var jsonData = response;
+			var data = google.visualization.arrayToDataTable(jsonData);
+			var options = {
+				title: 'Adverse Reactions by Age',
+				width: "100%"
+			};
+
+			var chart = new google.visualization.ColumnChart(document.getElementById('reaction_stat_div'));
+			chart.draw(data, options);
+		}
 	};	
 	
 	

@@ -27,6 +27,7 @@
     <!-- google chart end -->
     
     <!-- bootstrap gallery -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="js/photo-gallery.js"></script>
     <!-- bootstrap gallery end -->
    
@@ -71,7 +72,7 @@
 		          </div>
 	              <div id="drug_table_div" class="table-responsive table-bordered table-stripped">          
 	                  <table class="table" id="drug_table"></table>
-	              </div>    
+	              </div>
                   <div id="drug_stat_div"></div>
 			      <div id="btnDiv" ng-controller="btnController" class="ng-scope">
 	                  </br>       	
@@ -96,6 +97,7 @@
 	              </div>
             
                   <div id="drug-info" class="container"></div>
+                  <div tabindex="-1" id="myModal" aria-hidden="false"></div>
 			      <div id="reaction_stat_div"></div>
 			      <div id="btnDiv" ng-controller="btnController" class="ng-scope">	
                       </br>        	
