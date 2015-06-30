@@ -3,23 +3,27 @@ package org.djw.app.Test;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class TestLookup {
+public class TestSearchDrug {
 	
-	public TestLookup(){}
+	public TestSearchDrug(){}
 	
-	public boolean testDrugPartial(String ServiceURL, String MatchString){
+	public boolean testDrug(String ServiceURL,String MatchString){
 		boolean Success = false;
 	
 		ServiceClient serviceClient = new ServiceClient();
 		try{
 			String TestOutput = serviceClient.getService(ServiceURL);
+//			System.out.println(ServiceURL);
+//			System.out.println(TestOutput);
 			try{
 				int numMatches = 0;
 				JSONObject json = new JSONObject(TestOutput);
 				JSONObject Body = json.getJSONObject("Body");
-				JSONArray results = Body.getJSONArray("results");
-				for (int i=0; i<results.length(); i++){
-					String resultString = results.getString(i);
+				JSONObject ReportOutput = Body.getJSONObject("ReportOutput");
+				JSONArray rows = ReportOutput.getJSONArray("rows");
+				for (int i=0; i<rows.length(); i++){
+					JSONArray row = rows.getJSONArray(i);
+					String resultString = row.getString(0);
 					if (MatchString.equals(resultString)){
 						numMatches++;
 					}

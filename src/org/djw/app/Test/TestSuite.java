@@ -40,17 +40,74 @@ public class TestSuite {
 				String ServiceURL = config.getConfigValue(ConfigFile, "service_url");
 				ArrayList<String> FailedModules = new ArrayList<String>();
 				
+				//Test database lookup service
 				String TestLookupPartial = config.getConfigValue(ConfigFile, "test_lookup_partial");
 				String TestLookupMatch = config.getConfigValue(ConfigFile, "test_lookup_match");
 				TestLookup testLookup = new TestLookup();
 				String TestLookupURL = ServiceURL + "/fda/" + ServerKey + "/lookup/drugs/" + TestLookupPartial;
-				boolean testDrugPartial = testLookup.testDrugPartial(TestLookupURL, TestLookupPartial, TestLookupMatch);
+				boolean testDrugPartial = testLookup.testDrugPartial(TestLookupURL, TestLookupMatch);
 				TotalTested++;
 				if (testDrugPartial){
 					TotalPassed++;
 				} else {
 					TotalFailed++;
 					FailedModules.add("testLookup");
+				}
+
+				//Test reaction search service
+				String TestReactionSearch = config.getConfigValue(ConfigFile, "test_reaction_search");
+				String TestReactionMatch = config.getConfigValue(ConfigFile, "test_reaction_match");
+				TestSearchReaction testSearchReaction = new TestSearchReaction();
+				String TestReactionURL = ServiceURL + "/fda/" + ServerKey + "/search/reaction/" + TestReactionSearch;
+				boolean ReactionSearch = testSearchReaction.testReaction(TestReactionURL, TestReactionMatch);
+				TotalTested++;
+				if (ReactionSearch){
+					TotalPassed++;
+				} else {
+					TotalFailed++;
+					FailedModules.add("testSearchReaction");
+				}
+
+
+				//Test drug search service
+				String TestDrugSearch = config.getConfigValue(ConfigFile, "test_drug_search");
+				String TestDrugMatch = config.getConfigValue(ConfigFile, "test_drug_match");
+				TestSearchDrug testSearchDrug = new TestSearchDrug();
+				String TestDrugURL = ServiceURL + "/fda/" + ServerKey + "/search/drug/" + TestDrugSearch;
+				boolean DrugSearch = testSearchDrug.testDrug(TestDrugURL, TestDrugMatch);
+				TotalTested++;
+				if (DrugSearch){
+					TotalPassed++;
+				} else {
+					TotalFailed++;
+					FailedModules.add("testSearchDrug");
+				}
+
+				//Test drug info service
+				String TestDrugInfoSearch = config.getConfigValue(ConfigFile, "test_druginfo_search");
+				String TestDrugInfoMatch = config.getConfigValue(ConfigFile, "test_druginfo_match");
+				TestDrugInfo testDrugInfo = new TestDrugInfo();
+				String TestDrugInfoURL = ServiceURL + "/fda/" + ServerKey + "/druginfo/" + TestDrugInfoSearch;
+				boolean DrugInfo = testDrugInfo.testDrugInfo(TestDrugInfoURL, TestDrugInfoMatch);
+				TotalTested++;
+				if (DrugInfo){
+					TotalPassed++;
+				} else {
+					TotalFailed++;
+					FailedModules.add("testDrugInfo");
+				}
+
+				//Test chart service
+				String TestChartSearch = config.getConfigValue(ConfigFile, "test_chart_search");
+				TestChart testChart = new TestChart();
+				String TestChartURL = ServiceURL + "/fda/" + ServerKey + "/chart/drugs/" + TestChartSearch;
+				boolean Chart = testChart.testChart(TestChartURL);
+				TotalTested++;
+				if (Chart){
+					TotalPassed++;
+				} else {
+					TotalFailed++;
+					FailedModules.add("testChart");
 				}
 				
 				
