@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="mainModule">
 <head>
-    <title>ApplicationRx With Bootstrap and Angular JS</title>
+    <title>ReactionRX</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/styles.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">   
@@ -47,16 +47,16 @@
     </div> -->
  
 <header>
-    <h1 class="text-center"><a href="#">appRX</a></h1>
+    <h1><a href="/">Reaction RX</a></h1>
 </header>
    
 <div class="container-fluid">
     
     <div class="row">
 
-      <div class="col-md-4"></div> 
+      <div class="col-md-3"></div> 
       
-      <div class="col-md-4">
+      <div class="col-md-6">
       
           <ul class="nav nav-pills">
 		      <li class="active text-center" style="width:50%;"><a id="drugTab" data-toggle="pill" href="#search-drug">DRUG</a></li>
@@ -111,7 +111,7 @@
               </form>
 		  </div>
       </div>
-      <div class="col-md-4"> </div>      
+      <div class="col-md-3"> </div>      
     </div>
 </div>
 </body>
