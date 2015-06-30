@@ -71,7 +71,7 @@
 				          <input placeholder="Drug Name" class="autocomplete-form form-control form-text jquery-once-2-processed ui-autocomplete-input autocomplete-multiple ui-autocomplete-loading" id="autocomplete-input-drug" style="width: 85px;" type="text" name="drug" value="" size="60" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
 		              </div>
 		          </div>
-	              <div id="drug_table_div" class="table-responsive table-bordered table-stripped">          
+	              <div id="drug_table_div" class="table-responsive">          
 	                  <table class="table rx-table" id="drug_table"></table>
 	              </div>
                   <div id="drug_stat_div"></div>
@@ -86,14 +86,14 @@
                   </div>  
 		      </form>
 		      
-		      <form id="search-reaction" class="tab-pane search-form">             
+		      <form id="search-reaction" class="tab-pane search-form">
 		          <div id="reaction-input-control" class="autocomplete-container autocomplete-multiple">
 			          <div class="form-type-textfield form-item-field-keywords-und-value-field form-item form-group input-lg">
 			              <input placeholder="Adverse Reaction" class="autocomplete-form form-control form-text jquery-once-2-processed ui-autocomplete-input autocomplete-multiple ui-autocomplete-loading" id="autocomplete-input-reaction" style="width: 125px;" type="text" name="reaction" value="" size="60" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
 			          </div>
 	              </div>              
        
-	              <div id="reaction_table_div" class="table-responsive table-bordered table-stripped">          
+	              <div id="reaction_table_div" class="table-responsive">
 	                  <table class="table rx-table" id="reaction_table"></table>
 	              </div>
             
