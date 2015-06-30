@@ -3,7 +3,6 @@
 <head>
     <title>ReactionRX</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/styles.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">   
     <link href="css/jquery-ui.min-1.9.2.css" rel="stylesheet" media="screen">
     <link href="css/autocomplete-deluxe.css" rel="stylesheet" media="screen">
@@ -22,12 +21,14 @@
     <script src="js/autocomplete-deluxe.js"></script>
     <script src="js/autocomplete.js"></script>
     <script src="js/general.js"></script>
+
+    <link href="css/styles.css" rel="stylesheet" media="screen">
+
    <!-- google chart -->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <!-- google chart end -->
     
     <!-- bootstrap gallery -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="js/photo-gallery.js"></script>
     <!-- bootstrap gallery end -->
    
@@ -71,7 +72,7 @@
 		              </div>
 		          </div>
 	              <div id="drug_table_div" class="table-responsive table-bordered table-stripped">          
-	                  <table class="table" id="drug_table"></table>
+	                  <table class="table rx-table" id="drug_table"></table>
 	              </div>
                   <div id="drug_stat_div"></div>
 			      <div id="btnDiv" ng-controller="btnController" class="ng-scope">
@@ -93,11 +94,10 @@
 	              </div>              
        
 	              <div id="reaction_table_div" class="table-responsive table-bordered table-stripped">          
-	                  <table class="table" id="reaction_table"></table>
+	                  <table class="table rx-table" id="reaction_table"></table>
 	              </div>
             
                   <div id="drug-info" class="container"></div>
-                  <div tabindex="-1" id="myModal" aria-hidden="false"></div>
 			      <div id="reaction_stat_div"></div>
 			      <div id="btnDiv" ng-controller="btnController" class="ng-scope">	
                       </br>        	
