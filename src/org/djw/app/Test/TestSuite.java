@@ -127,6 +127,11 @@ public class TestSuite {
 		} else {
 			System.out.println("OVERALL RESULT: " + TestResult);
 		}
+		if (TestResult.equals("PASS")){
+			System.exit(0);
+		} else {
+			System.exit(1);
+		}
 	}
 
 }
