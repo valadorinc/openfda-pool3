@@ -263,3 +263,13 @@ h1 a {
 .nav > li:last-child > a {
   margin: 0 -2px 0px 0px;
 }
+.ui-widget-header .ui-icon {
+  background-image: url(../images/fileclose.png) !important;
+}
+#myModal .next {
+  float: right;
+}
+#bg-img {
+  cursor: pointer;
+  cursor: hand;
+}

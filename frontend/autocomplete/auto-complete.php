@@ -37,7 +37,16 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $output = curl_exec($ch);
 curl_close($ch);
 //take the raw output and convert it into a json object
-$data = json_decode($output);
+$temp = substr($output, 0, 1);
+//$data = json_decode($output);
+if($temp!= "{"){
+	error_log("error found");
+	die("error found");
+}
+else {
+	$data = json_decode($output);
+}
+
 //Now that it's a json object we check the status code. 0 means success.
 $StatusCode = $data->StatusCode;
 if ($StatusCode == "0"){
