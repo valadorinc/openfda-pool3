@@ -219,7 +219,7 @@ function drugLabelsDisplay(drugName) {
 	    		
 	    	    $.each(response.DrugInfo, function(i, item) {
 	    	    	if (i != 'images'){
-	    	    		i = i.replace(/([_])/, " ");
+	    	    		i = i.replace(/_/g, " ");
 	    	    		item = item.replace(/([\[\]'"])/g, "");
 	    	    		if(item != ""){
 	    	    			$('#drug-info').append('<p>' + i + ': ' + item + '</p>');

@@ -78,7 +78,7 @@
 			      <div id="btnDiv" ng-controller="btnController" class="ng-scope">
 	                  </br>       	
 	        	      <div id="statBtn">
-	        		      <button id="statBtn" ng-click="displayDrugStat()">Statistic</button>
+	        		      <button id="statBtn" ng-click="displayDrugStat()" class="drug-btn disabled" disabled>Statistics</button>
 	        	      </div>	
 	        	      <div id="resetBtn">
             		      <button id="resetBtn" ng-click="reset()">Reset</button>
@@ -103,7 +103,7 @@
 			      <div id="btnDiv" ng-controller="btnController" class="ng-scope">	
                       </br>        	
 	        	      <div id="statBtn">
-	        		      <button id="statBtn" ng-click="displayReactionStat()">Statistic</button>
+	        		      <button id="statBtn" ng-click="displayReactionStat()" class="reaction-btn disabled" disabled>Statistics</button>
 	        	      </div>	
 	        	      <div id="resetBtn">
             		      <button id="resetBtn" ng-click="reset()">Reset</button>

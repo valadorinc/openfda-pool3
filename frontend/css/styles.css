@@ -295,3 +295,7 @@ header h1 a {
 .img-responsive {
   height: 95%;
 }
+#statBtn.disabled {
+  border-color: #B0B0B0;
+  color: #B0B0B0;
+}
