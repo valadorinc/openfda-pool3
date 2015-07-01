@@ -99,6 +99,7 @@
             
                   <div id="drug-info" class="container"></div>
 			      <div id="reaction_stat_div"></div>
+			      <div tabindex="-1" id="myModal" title="Drug Information from DailyMed" aria-hidden="false"></div>
 			      <div id="btnDiv" ng-controller="btnController" class="ng-scope">	
                       </br>        	
 	        	      <div id="statBtn">
