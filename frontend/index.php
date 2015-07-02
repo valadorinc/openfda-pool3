@@ -48,9 +48,11 @@
     </div> -->
  
 <header>
-    <h1><a href="/">Reaction RX</a></h1>
+	<div id="title" ng-controller="titleController" class="ng-scope" title="About Reaction Rx">
+    	<h1><a ng-click="displayAbout()">Reaction RX</a></h1>
+    </div>
 </header>
-   
+<div id="about" class="about-dialog" title="About ReactionRX"></div>   
 <div class="container-fluid">
     
     <div class="row">
@@ -74,11 +76,12 @@
 		          
 		          <div id="result1"></div>
 
-                  <div id="drug_stat_div"></div>
+                  <div id="drug_stat_div" title = "Drug Statistics Graph"></div>
 			      <div id="btnDiv1" ng-controller="btnController" class="ng-scope" style="display:none;">
 	                  </br>       	
 	        	      <div id="statBtn">
-	        		      <button id="statBtn" ng-click="displayDrugStat()" class="drug-btn disabled" disabled>Statistics</button>
+	        	      	  <!--  ng-click="displayDrugStat()" -->
+	        		      <button id="statBtn" ng-click="displayDrugStat()" class="drug-btn enabled">Statistics</button>
 	        	      </div>	
 	        	      <div>
             		      <button id="resetBtn1" ng-click="reset('drug')">Reset</button>
@@ -96,12 +99,12 @@
                   <div id="result2"></div>
                    
                   <div id="drug-info" class="container"></div>
-			      <div id="reaction_stat_div"></div>
-			      <div tabindex="-1" id="myModal" title="Drug Information from DailyMed" aria-hidden="false"></div>
+			      <div id="reaction_stat_div" title="Reaction Statistics Graph"></div>
+			      <div tabindex="-1" id="myModal" class="jq-dialog" title="Drug Information from DailyMed" aria-hidden="false"></div>
 			      <div id="btnDiv2" ng-controller="btnController" class="ng-scope" style="display:none;">	
                       </br>        	
 	        	      <div id="statBtn">
-	        		      <button id="statBtn" ng-click="displayReactionStat()" class="reaction-btn disabled" disabled>Statistics</button>
+	        		      <button id="statBtn" ng-click="displayReactionStat()" class="reaction-btn enabled" >Statistics</button>
 	        	      </div>	
 	        	      <div>
             		      <button id="resetBtn2" ng-click="reset('reaction')">Reset</button>
