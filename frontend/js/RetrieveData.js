@@ -21,7 +21,7 @@ $( document ).ready(function() {
 			    	
 			    	$(function() {				    		
 				    		var table_results = '<div id="drug_table_div" class="table-responsive table-bordered table-stripped">';
-				    		table_results += '<table class="table" id="drug_table">';
+				    		table_results += '<table class="table rx-table" id="drug_table">';
 				    		table_results += '<thead><tr><th>' + response.cols[0] + '</th><th>' +  response.cols[1] + '</th></tr></thead>'
 				    					    				    		
 				    	    $.each(response.rows, function(i, item) {			    	    	
@@ -66,7 +66,7 @@ $( document ).ready(function() {
 			    	
 			    	$(function() {
 			    		var table_results = '<div id="reaction_table_div" class="table-responsive table-bordered table-stripped">';
-			    		table_results += '<table class="table" id="reaction_table">';
+			    		table_results += '<table class="table rx-table" id="reaction_table">';
 			    		table_results += '<thead><tr><th>' + response.cols[0] + '</th><th>' +  response.cols[1] + '</th></tr></thead>'
 			    					    				    		
 			    	    $.each(response.rows, function(i, item) {
