@@ -188,17 +188,20 @@ h1 a {
   cursor: pointer;
   cursor: hand;
 }
-#btnDiv {
+#btnDiv1,
+#btnDiv2 {
   padding: 0px 0px 15px 0px;
 }
-#resetBtn {
+#resetBtn1,
+#resetBtn2 {
   border-radius: 25px;
   border-color: #fff;
   background-color: rgba(255, 255, 255, 0);
   color: #fff;
   float: right;
 }
-#resetBtn:focus {
+#resetBtn1:focus,
+#resetBtn2:focus {
   outline: none;
 }
 #statBtn {
