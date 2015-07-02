@@ -12,12 +12,18 @@ header h1 a {
   text-indent: -133337em;
   margin: .25em auto;
   height: 120px;
+  width: 465px;
   background-image: url(../images/reactionrx.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom center;
   background-color: transparent;
   opacity: .4;
+  cursor: pointer;
+  cursor: hand;
+}
+header h1 a:hover {
+  opacity: .7;
 }
 /* Tabs */
 .selection {
@@ -300,4 +306,10 @@ header h1 a {
 #statBtn.disabled {
   border-color: #B0B0B0;
   color: #B0B0B0;
+}
+#drug_stat_div.ui-dialog-content {
+  overflow: hidden;
+}
+#reaction_stat_div.ui-dialog-content {
+  overflow: hidden;
 }
