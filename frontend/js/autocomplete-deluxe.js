@@ -355,14 +355,33 @@ $(document).ready(function() {
     });
   };
 
-  AppRX.MultipleWidget.Item.prototype.remove = function(e, d) {
+  AppRX.MultipleWidget.Item.prototype.remove = function(e) {
     this.element.remove();
-    $( "#" + this.widget.id ).trigger( "click" );
-    /*QQQQQvar values = this.widget.valueForm.val();
-    var escapedValue = AppRX.escapeRegex( this.item.value );
-    var regex = new RegExp('()*""' + escapedValue + '""|' + escapedValue + '()*', 'gi');
-    this.widget.valueForm.val(values.replace(regex, ''));
-    delete this.widget.items[this.value];*/
+     
+    delete this.widget.items[this.item.label];
+    
+    var resetBtnIdName = '';
+    
+    if(this.widget.id == "autocomplete-input-drug") {
+    	if( Object.keys(this.widget.items).length <= 0 ) {
+    	    resetBtnIdName = 'resetBtn1';
+    	    var el = document.getElementById(resetBtnIdName);
+    	    angular.element(el).trigger('click');
+    	}
+        else {
+        	$( "#" + this.widget.id ).trigger( "click" );
+        }
+    }
+    else if(this.widget.id == "autocomplete-input-reaction") {
+    	if( Object.keys(this.widget.items).length <= 0 ) {
+    	    resetBtnIdName = 'resetBtn2';
+	        var el = document.getElementById(resetBtnIdName);
+	        angular.element(el).trigger('click');
+    	}
+        else {
+        	$( "#" + this.widget.id ).trigger( "click" );
+        }
+    }
   };
     
   AppRX.MultipleWidget.prototype.setup = function() {
