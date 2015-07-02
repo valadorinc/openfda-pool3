@@ -17,29 +17,38 @@ $( document ).ready(function() {
 			    
 		    $.get('data/OpenFdaDataRetrieval.php', {keyword:keyword, type:'drug'}).
 		      success(function(response) {
-			    	response = JSON.parse(response);
-			    	
-			    	$(function() {				    		
-				    		var table_results = '<div id="drug_table_div" class="table-responsive table-bordered table-stripped">';
-				    		table_results += '<table class="table rx-table" id="drug_table">';
-				    		table_results += '<thead><tr><th>' + response.cols[0] + '</th><th>' +  response.cols[1] + '</th></tr></thead>'
-				    					    				    		
-				    	    $.each(response.rows, function(i, item) {			    	    	
-				    	    	table_results += '<tr><td>' + item[0] + '</td><td>' + item[1] + '</td></tr>'
-				    	    });
-				    		
-				    		table_results += '</table>';
-				    		table_results += '</div>';
-				    		
-				    		$('#result1').empty();
-				    		$('#result1').append(table_results);
-				    		$('#btnDiv1').show();
-				    	});
-			      }).
-			      error(function(error) {
-			    	  //alert('error');
-			      });
-		}
+			      response = JSON.parse(response);
+			      
+			      if(response.cols[0] == undefined && response.cols[1] == undefined) {
+				      $('#result1').empty();
+				      $('#result1').append("No Results");
+				      $('#btnDiv1').show(); 
+			      }
+			      else {
+				      $(function() {				    		
+					      var table_results = '<div id="drug_table_div" class="table-responsive table-bordered table-stripped">';
+					      table_results += '<table class="table rx-table" id="drug_table">';
+					      table_results += '<thead><tr><th>' + response.cols[0] + '</th><th>' +  response.cols[1] + '</th></tr></thead>'
+					    					    				    		
+					      $.each(response.rows, function(i, item) {			    	    	
+					          table_results += '<tr><td>' + item[0] + '</td><td>' + item[1] + '</td></tr>'
+					      });
+					    		
+					      table_results += '</table>';
+					      table_results += '</div>';
+					    		
+					      $('#result1').empty();
+					      $('#result1').append(table_results);
+					      $('#btnDiv1').show();
+					  });
+			      }
+			      
+			      
+			  }).
+			  error(function(error) {
+			      //alert('error');
+			  });
+		  }
 	});
 	
 	$( "#autocomplete-input-reaction" ).click(function(e) {
@@ -64,22 +73,29 @@ $( document ).ready(function() {
 		      success(function(response) {
 			    	response = JSON.parse(response);
 			    	
-			    	$(function() {
-			    		var table_results = '<div id="reaction_table_div" class="table-responsive table-bordered table-stripped">';
-			    		table_results += '<table class="table rx-table" id="reaction_table">';
-			    		table_results += '<thead><tr><th>' + response.cols[0] + '</th><th>' +  response.cols[1] + '</th></tr></thead>'
-			    					    				    		
-			    	    $.each(response.rows, function(i, item) {
-			    	    	item[0] = item[0].replace(/(['"])/g, "\\$1");
-			    	    	
-			    	    	var link = "<div id='myDiv' onClick='drugLabelsDisplay(\"" + item[0] + "\")'><span>" + item[0] + "</span></div>";
-			    	    	table_results += "<tr><td>" + link + "</td><td>" + item[1] +  "</td></tr>";			    	    	
-			    	    });
-			    		
+			    	if(response.cols[0] == undefined && response.cols[1] == undefined) {
 			    		$('#result2').empty();
-			    		$('#result2').append(table_results);
+			    		$('#result2').append('No Results');
 			    		$('#btnDiv2').show();
-			    	});
+			    	}
+			    	else {
+				    	$(function() {
+				    		var table_results = '<div id="reaction_table_div" class="table-responsive table-bordered table-stripped">';
+				    		table_results += '<table class="table rx-table" id="reaction_table">';
+				    		table_results += '<thead><tr><th>' + response.cols[0] + '</th><th>' +  response.cols[1] + '</th></tr></thead>'
+				    					    				    		
+				    	    $.each(response.rows, function(i, item) {
+				    	    	item[0] = item[0].replace(/(['"])/g, "\\$1");
+				    	    	
+				    	    	var link = "<div id='myDiv' onClick='drugLabelsDisplay(\"" + item[0] + "\")'><span>" + item[0] + "</span></div>";
+				    	    	table_results += "<tr><td>" + link + "</td><td>" + item[1] +  "</td></tr>";			    	    	
+				    	    });
+				    		
+				    		$('#result2').empty();
+				    		$('#result2').append(table_results);
+				    		$('#btnDiv2').show();
+				    	});
+			    	}
 		      }).
 		      error(function(error) {
 		    	  //alert('error');
