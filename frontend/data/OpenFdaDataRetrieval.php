@@ -16,7 +16,7 @@ $type = strip_tags($type);
 $type = htmlspecialchars($type);
 $keyword = strip_tags($keyword);
 $keyword = htmlspecialchars($keyword);
-$keyword = urlencode($keyword);
+$keyword = rawurlencode($keyword);
 
 if($type == "reaction") {
 	$url = API_SERVICE_BASE_URL . API_KEY . '/search/reaction/' . $keyword;

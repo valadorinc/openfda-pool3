@@ -61,9 +61,9 @@
       
       <div class="col-md-6">
       
-          <ul class="nav nav-pills">
-		      <li class="active text-center" style="width:50%;"><a id="drugTab" data-toggle="pill" href="#search-drug">DRUG</a></li>
-		      <li class="text-center" style="width:49%;"><a id="reactionTab" data-toggle="pill" href="#search-reaction">ADVERSE REACTION</a></li>
+          <ul class="nav nav-pills nav-pills-justified">
+		      <li class="active text-center"><a id="drugTab" data-toggle="pill" href="#search-drug">DRUG</a></li>
+		      <li class="text-center"><a id="reactionTab" data-toggle="pill" href="#search-reaction">ADVERSE REACTION</a></li>
 		  </ul>
 		  
 		  <div id="drug-reaction-tab-container" class="tab-content gradient-drug-search">
