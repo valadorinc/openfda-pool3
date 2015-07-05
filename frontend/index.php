@@ -36,16 +36,6 @@
 </head>
 <!-- <body ng-app="mainModule"> -->
 <body ng-app="examples" id="top" class="ng-scope" data-twttr-rendered="true">
- 	
-<!--    <div ng-controller="drugController" class="ng-scope">
-        <h3>1. Search Drug(s)</h3>
-        <button id="drugBtn" ng-click="onDrugSearch()">Click me</button>
-    </div>
-    
-    <div ng-controller="reactionController" class="ng-scope">
-        <h3>2. Search Reaction(s)</h3>
-        <button id="reactionBtn" ng-click="onReactionSearch()">Click me</button>
-    </div> -->
  
 <header>
 	<div id="title" ng-controller="titleController" class="ng-scope" title="About Reaction Rx">
@@ -98,7 +88,8 @@
        
                   <div id="result2"></div>
                    
-                  <div id="drug-info" class="container"></div>
+                  <div id="drug-info" class="row"></div>
+                  
 			      <div id="reaction_stat_div" title="Reaction Statistics Graph"></div>
 			      <div tabindex="-1" id="myModal" class="jq-dialog" title="Drug Information from DailyMed" aria-hidden="false"></div>
 			      <div id="btnDiv2" ng-controller="btnController" class="ng-scope" style="display:none;">	

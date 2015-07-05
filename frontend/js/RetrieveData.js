@@ -108,7 +108,6 @@ $( document ).ready(function() {
 var app = angular.module("mainModule", []);
 
 function drugLabelsDisplay(drugName) {
-	//alert(link);
 	
 	var keyword = drugName;
 	
@@ -118,43 +117,53 @@ function drugLabelsDisplay(drugName) {
 	    	
 	    	$(function() {
 	    		$('#reaction_table_div').hide();
+	    			
+	    		var table = '<div class="col-lg-12">';
+	    		table += '<h1 class="header">Drug Information</h1>';
+	    		table += '</div>';
+	    		
+	    		table  += '<table class="table rx-table">';
 	    		
 	    	    $.each(response.DrugInfo, function(i, item) {
 	    	    	if (i != 'images'){
 	    	    		i = i.replace(/_/g, " ");
 	    	    		item = item.replace(/([\[\]'"])/g, "");
 	    	    		if(item != ""){
-	    	    			$('#drug-info').append('<p>' + i + ': ' + item + '</p>');
+	    	    			table += '<tr><td class="capitalize">' + i + ': </td><td>' + item + '</td></tr>';
 	    	    		}
 	    	    		else {
-	    	    			$('#drug-info').append('<p>' + i + ':  N/A!</p>');
+	    	    			table += '<tr><td>' + i + ': </td><td>N/A</td></tr>';
 	    	    		}
 	    	    	} 	
 	    	    });
-	    	    //$('#drug-info').append('<div tabindex="-1" id="myModal" aria-hidden="false"></div>');
-	    	    //$('#drug-info').append('<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-body">');
 	    	    
-	    	    //$('#drug-info').append('<div id="myModal"></div>'); //QQQQQ
+	    	    $('#drug-info').append(table);
 
-	    	    var images ="";
-
-	    	    $.each(response.DrugInfo.images, function(i, item) {
-	    	    	images += '<li id="bg-li"><img id="bg-img" src="' + item + '" class="img-rounded img-responsive" alt="Cinque Terre" width="100" height="100"></li>';
-	    	    	
-	    	    	//$('#drug-info').append('<li id="bg-li"><img id="bg-img" src="' + item + '" class="img-rounded img-responsive" alt="Cinque Terre" width="100" height="100"></li>');
+	    	    var images = "";
+	    	    var index = 1;
+	    	    
+	    	    images += '<div class="col-lg-12">';
+	    	    images += '<h1 class="header">Drug Label Image Gallery</h1>';
+	    	    images += '</div>';
+	    	    
+	    	    $.each(response.DrugInfo.images, function(i, item) {	    	    	
+	    	    	images += '<li class="col-lg-3 col-md-4 col-xs-6 thumb"><img class="bg-img" src="' + item + '" alt="Drug Label Image ' + index + '"></li>';
+	    	    	index++;
 	    	    });
 	    	    
-	    	    $image = $('<ul class="row">').append($(images));
+	    	    $image = $('<ul class="drug-labels">').append($(images));
+	    	    
 	    	    $('#drug-info').append($image);
 	    	    
 	    	    $('li img').on('click',function(){
+	    	    		    	    	
     	    		var src = $(this).attr('src');
     	    		var img = '<img src="' + src + '" class="img-responsive"/>';
     	    		
-    	    		//start of new code new code
+    	    		//start of new code
     	    		var arrayIndex = $(this).parent('li').index();   
     	    		
-    	    		var totalArray = $('ul.row li').length;
+    	    		var totalArray = $('ul.drug-labels li').length;
     	    		
     	    		var html = '';
     	    		html += img;                
@@ -210,7 +219,7 @@ function drugLabelsDisplay(drugName) {
 	    	    	var indexPrevious = $('#myModal .previous').attr('href');
 	    	    	
 	    	    	var index = indexNext;
-	    	    	var src = $('ul.row li:nth-child('+ index +') img').attr('src');             
+	    	    	var src = $('ul.drug-labels li:nth-child('+ index +') img').attr('src');             
 	    	    	
 	    	    	$('#myModal img').attr('src', src);	    	    	
 	    	    	
@@ -224,7 +233,7 @@ function drugLabelsDisplay(drugName) {
 	    	    	}
 	    	    	
 	    	    	
-	    	    	var total = $('ul.row li').length; 
+	    	    	var total = $('ul.drug-labels li').length; 
 	    	    	
 	    	    	//hide next button
 	    	    	if(total <= indexNext){
@@ -243,7 +252,6 @@ function drugLabelsDisplay(drugName) {
 	    	    	
 	    	    	return false;
 	    	    });
-	    	    //YYYYY
 	    	});
     }).
     error(function(error) {
@@ -319,8 +327,6 @@ app.controller("btnController", function($scope) {
 	    });
 	    
 	    keyword = keywordArr.join("~");
-	    //keyword = keywordArr[0];
-	    //keyword = keyword.replace(" ", "+");
 
 	    $.get('data/OpenFdaDataRetrieval.php', {keyword:keyword, type:'drugChart'}).
 	      success(function(response) {
@@ -378,7 +384,6 @@ app.controller("btnController", function($scope) {
 	    });
 	    
 	    keyword = keywordArr.join("~");
-	    //keyword = keywordArr[0];
 
 	    $.get('data/OpenFdaDataRetrieval.php', {keyword:keyword, type:'reactionChart'}).
 	      success(function(response) {
