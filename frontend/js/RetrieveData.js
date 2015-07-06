@@ -3,7 +3,7 @@ $( document ).ready(function() {
 	$( "#autocomplete-input-drug" ).click(function(e) {
 		
 		if(e.originalEvent == undefined) {
-			$('#drug-reaction-tab-container').removeClass('gradient-drug-search');
+			//$('#drug-reaction-tab-container').removeClass('gradient-drug-search');
 						
 			e.preventDefault();
 		    var keywordArr = new Array();  
@@ -55,7 +55,7 @@ $( document ).ready(function() {
 		
 		if(e.originalEvent == undefined) {
 		
-			$('#drug-reaction-tab-container').removeClass('gradient-reaction-search'); //QQQQQ
+			//$('#drug-reaction-tab-container').removeClass('gradient-reaction-search'); //QQQQQ
 			
 			var code = event.keyCode || event.which;
 		
@@ -140,11 +140,15 @@ function drugLabelsDisplay(drugName) {
 	    	    $('#drug-info').append(table);
 
 	    	    var images = "";
+	    	    var header = "";
 	    	    var index = 1;
 	    	    
-	    	    images += '<div class="col-lg-12">';
-	    	    images += '<h1 class="header">Drug Label Image Gallery</h1>';
-	    	    images += '</div>';
+	    	    header += '<div class="col-lg-12">';
+	    	    header += '<h1 class="header">Drug Label Image Gallery</h1>';
+	    	    header += '</div>';
+	    	    
+	    	    
+	    	    $('#drug-info').append(header);
 	    	    
 	    	    $.each(response.DrugInfo.images, function(i, item) {	    	    	
 	    	    	images += '<li class="col-lg-3 col-md-4 col-xs-6 thumb"><img class="bg-img" src="' + item + '" alt="Drug Label Image ' + index + '"></li>';
@@ -353,7 +357,6 @@ app.controller("btnController", function($scope) {
 							});
 							
 							if($("#drug_stat_div").dialog( "isOpen" )){
-								//document.getElementById("about").innerHTML = "<p>Disclaimer: ReactionRX is intended to provide helpful drug and health information for the general public based on data from openFDA. It is made available with the understanding that Valador Inc., the author of the ReactionRX Content, and openFDA are not engaged in rendering medical, health, psychological, or any other kind of personal professional services on this site. The ReactionRX Content should not be considered complete, and does not cover all diseases, ailments, physical conditions or their treatment. It should not be used in place of a call or visit to a medical, health or other competent professional, who should be consulted before adopting any of the suggestions on this site or before drawing any inferences from the ReactionRX Content.</p>";
 								var chart = new google.visualization.ColumnChart(document.getElementById("drug_stat_div"));
 								var options = {
 										title: 'Count vs Age',
