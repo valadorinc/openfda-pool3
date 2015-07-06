@@ -30,7 +30,7 @@ container. Type "boot2docker ip". Make note of the ip address as we will need it
 should be named "valador_pool3"
 
 9. Start the container by typing 
-docker run -p 80:8080 -i -t valador_pool3
+docker run -p 80:80 -i -t valador_pool3
 
 10. You will get a new prompt looking something like this "[root@f217f9c3ee07 /]#"  
 You are now connected to the container. To start the application type 
