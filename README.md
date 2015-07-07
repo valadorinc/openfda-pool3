@@ -81,7 +81,7 @@ The application is deployed as a Docker image.  Valador uploaded versions to Doc
 ###(P) Installation Documentation
 Valador included an installation guide:  See [Github document](https://github.com/valadorinc/openfda-pool3/blob/master/docs/InstallGuide_pool3.txt).
 
-###(Q)  Open Licensed Prototype and Platforms 
+###(Q)  Openly Licensed Prototype and Platforms 
 The prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge.  These include:  
 *	Bootstrap
 *	PHP
