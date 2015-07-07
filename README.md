@@ -75,7 +75,7 @@ Valador chose git as our configuration management tool.  We made use of GitHub f
 Valador deployed the prototype on Amazon AWS platform which is fully FedRAMP certified. Tools like CloudWatch provide continuous monitoring of logs and metrics collection which work in concert with application frameworks to provide alarm thresholds and alerts. 
 
 
-###(I) Deploy in a Container
+###(O) Deploy in a Container
 The application is deployed as a Docker image.  Valador uploaded versions to Dockerhub. Unfortunately the site was experiencing problems so we have placed the image [here](http://pool3.valador.net/18F/valador_pool3.tar). 
 
 ###(P) Installation Documentation
